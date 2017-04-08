@@ -1,0 +1,40 @@
+
+<div class='container'>
+
+		<div class="left">
+
+				<div class="note">
+						<h2>Огляд квартири</h2>
+						<h4 class="changes">Дім №{{id1}}, секція {{id2}}, поверх №{{id3}}, {{currentApartment.roomCount}} кімнатна квартира</h4>
+				</div>
+
+				<div class="planing">
+						<img class="plan-xD" src="{{apartmentSrc}}" alt="1" >
+				</div>
+				<div class="pick">
+																<!-- Звернути увагу на наступний код !!! !!! !!! -->
+						<span  *ngFor="let dimention of dimentions"
+										[class.active]="active.dim == dimention.dim"
+										(click)="changeView($event, dimention)">{{dimention.dim.toUpperCase()}}</span>
+				</div>
+
+		</div>
+
+		<div class="right">
+				<ul>
+					<li><div><h2>Площа</h2></div>
+							<div><h4>м2</h4></div>
+					</li>
+					<li *ngFor='let propVal of currentApartment.aboutApartment'>
+						<div>{{propVal.property}}</div>
+						<div>{{propVal.value}}</div>
+					</li>
+				</ul>
+		</div>
+
+			<div class="go_back">
+				<button (click)='goBack()'>Назад</button>
+			</div>
+
+<br class='clear_fix'/>
+</div>

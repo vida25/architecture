@@ -1,0 +1,83 @@
+.sidenav {
+	opacity: .6;
+	position: relative;
+	margin-top: 20px;
+	left: 10px;
+	width: 180px;
+	height: 300px;
+	font-size: 15px;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	overflow: hidden;
+	z-index: 1;
+}
+.sidenav:hover {
+	opacity: .7;
+	background: black;
+}
+.sidenav a {
+	padding: 6px 6px 6px 32px;
+	text-decoration: none;
+	font-size: 20px;
+	color: gold;
+	display: block;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	font-family: "Lato", sans-serif;
+	cursor: pointer;
+}
+.sidenav a:hover{
+	display: block;
+	outline: 2px solid white;
+	border-left: 2px solid white;
+	border-right: 2px solid white;
+	color: white;
+
+}
+
+.openNav, .openNav>span {
+	display: inline-block;
+	margin: 0;
+}
+.openNav {
+	width: 220px;
+	color: gold;
+	cursor: pointer;
+	opacity: 0.5;
+	font-size: 40px;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.menuText {
+	width: 0px;
+	opacity: 0;
+	text-transform: uppercase;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.hide_to_left {
+	display: inline-block;
+	width: 50px;
+	opacity: 0;
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.openNav:hover>.hide_to_left {
+	width: 0;
+}
+.openNav:hover>.menuText, .menuText:hover {
+	opacity: 1;
+	width: 120px;
+}
+.openNav:hover {
+	opacity: 1;
+}
+
+@media screen and (max-height: 400px) {
+  .sidenav { height: 220px; width: 140px}
+  .sidenav a {font-size: 16px;}
+  .openNav { font-size: 30px; }
+  .openNav:hover>.menuText, .menuText:hover {
+	width: 95px;
+  }
+}
