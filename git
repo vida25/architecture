@@ -1,0 +1,2969 @@
+[1mdiff --git a/src/app/apartment/apartment.component.css b/src/app/apartment/apartment.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex 1f49f64..0000000[m
+[1m--- a/src/app/apartment/apartment.component.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,102 +0,0 @@[m
+[31m-.container {[m
+[31m-	display: block;[m
+[31m-	margin: 0 auto;[m
+[31m-	width: 80%;[m
+[31m-}[m
+[31m-.pick {[m
+[31m-	font: 20px serif;[m
+[31m-	font-weight: bold;[m
+[31m-	color: grey;[m
+[31m-	text-align: center;[m
+[31m-}[m
+[31m-.pick>span{[m
+[31m-	display: inline-block;[m
+[31m-	margin: 20px;[m
+[31m-	cursor: pointer;[m
+[31m-}[m
+[31m-.active {[m
+[31m-	color: orange;[m
+[31m-}[m
+[31m-div.left {[m
+[31m-	float: left;[m
+[31m-	display: block;[m
+[31m-	width: 47%;[m
+[31m-}[m
+[31m-div.left h2, div.left h4 {[m
+[31m-	margin-left: 20px[m
+[31m-}[m
+[31m-div.left img {[m
+[31m-	display: block;[m
+[31m-	margin: 50px auto;[m
+[31m-	width: 90%;[m
+[31m-}[m
+[31m-[m
+[31m-div.planing {[m
+[31m-	height: 400px;[m
+[31m-}[m
+[31m-div.left, div.right {[m
+[31m-	margin: 20px auto 20px auto;[m
+[31m-	padding: 10px 10px 30px 0;[m
+[31m-	 -webkit-box-shadow: 10px 10px 43px 1px rgba(0,0,0,0.75);[m
+[31m-			-moz-box-shadow: 10px 10px 43px 1px rgba(0,0,0,0.75);[m
+[31m-					 box-shadow: 10px 10px 43px 1px rgba(0,0,0,0.75);[m
+[31m-}[m
+[31m-[m
+[31m-div.right {[m
+[31m-	float: right;[m
+[31m-	display: block;[m
+[31m-	width: 45%;[m
+[31m-}[m
+[31m-[m
+[31m-div.right ul {[m
+[31m-	list-style: none;[m
+[31m-}[m
+[31m-[m
+[31m-div.right ul>li>div:nth-child(1),[m
+[31m-div.right ul>li>div:nth-child(2) {[m
+[31m-	display: block;[m
+[31m-	margin: 0 auto;[m
+[31m-	font: 20px;[m
+[31m-	font-weight: bold;[m
+[31m-	text-transform: capitalize;[m
+[31m-	margin-top: 5px;[m
+[31m-}[m
+[31m-div.right ul>li>div:nth-child(1) {[m
+[31m-		float: left;[m
+[31m-		width: 60%;[m
+[31m-}[m
+[31m-div.right ul>li>div:nth-child(2) {[m
+[31m-	float: right;[m
+[31m-	width: 40%;[m
+[31m-}[m
+[31m-[m
+[31m-div.go_back {[m
+[31m-	display: block;[m
+[31m-	float: right;[m
+[31m-	width: 40%;[m
+[31m-	margin: 20px auto;[m
+[31m-	text-align: center;[m
+[31m-}[m
+[31m-div.go_back button {[m
+[31m-	display: inline-block;[m
+[31m-	width: 100px;[m
+[31m-	height: 50px;[m
+[31m-	font-size: 20px;[m
+[31m-	font-family: serif;[m
+[31m-	font-style: italic;[m
+[31m-}[m
+[31m-[m
+[31m-.clear_fix {[m
+[31m-	display: block;[m
+[31m-	clear: both;[m
+[31m-	line-height: 1px;[m
+[31m-}[m
+[31m-[m
+[31m-@media screen and (max-width: 750px) {[m
+[31m-    div.right, div.left , div.go_back {[m
+[31m-    	clear: both;[m
+[31m-    	float:left;[m
+[31m-    	width: 100%;[m
+[31m-    	min-width: 500px;[m
+[31m-    }[m
+[31m-}[m
+[1mdiff --git a/src/app/apartment/apartment.component.html b/src/app/apartment/apartment.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex 00a51c3..0000000[m
+[1m--- a/src/app/apartment/apartment.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,40 +0,0 @@[m
+[31m-[m
+[31m-<div class='container'>[m
+[31m-[m
+[31m-		<div class="left">[m
+[31m-[m
+[31m-				<div class="note">[m
+[31m-						<h2>Огляд квартири</h2>[m
+[31m-						<h4 class="changes">Дім №{{id1}}, секція {{id2}}, поверх №{{id3}}, {{currentApartment.roomCount}} кімнатна квартира</h4>[m
+[31m-				</div>[m
+[31m-[m
+[31m-				<div class="planing">[m
+[31m-						<img class="plan-xD" src="{{apartmentSrc}}" alt="1" >[m
+[31m-				</div>[m
+[31m-				<div class="pick">[m
+[31m-																<!-- Звернути увагу на наступний код !!! !!! !!! -->[m
+[31m-						<span  *ngFor="let dimention of dimentions"[m
+[31m-										[class.active]="active.dim == dimention.dim"[m
+[31m-										(click)="changeView($event, dimention)">{{dimention.dim.toUpperCase()}}</span>[m
+[31m-				</div>[m
+[31m-[m
+[31m-		</div>[m
+[31m-[m
+[31m-		<div class="right">[m
+[31m-				<ul>[m
+[31m-					<li><div><h2>Площа</h2></div>[m
+[31m-							<div><h4>м2</h4></div>[m
+[31m-					</li>[m
+[31m-					<li *ngFor='let propVal of currentApartment.aboutApartment'>[m
+[31m-						<div>{{propVal.property}}</div>[m
+[31m-						<div>{{propVal.value}}</div>[m
+[31m-					</li>[m
+[31m-				</ul>[m
+[31m-		</div>[m
+[31m-[m
+[31m-			<div class="go_back">[m
+[31m-				<button (click)='goBack()'>Назад</button>[m
+[31m-			</div>[m
+[31m-[m
+[31m-<br class='clear_fix'/>[m
+[31m-</div>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/apartment/apartment.component.ts b/src/app/apartment/apartment.component.ts[m
+[1mdeleted file mode 100644[m
+[1mindex a23b3f8..0000000[m
+[1m--- a/src/app/apartment/apartment.component.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,68 +0,0 @@[m
+[31m-import { Component, OnInit, OnDestroy } from '@angular/core';[m
+[31m-import { ActivatedRoute, Router } from '@angular/router';[m
+[31m-import { Location } from '@angular/common';[m
+[31m-[m
+[31m-import { ApartmentsStorage, ApatrmentInterface } from '../data/apartments.storage';[m
+[31m-[m
+[31m-export const Dimentions: dimentionInterface[] = [[m
+[31m-  {dim: '2d'},[m
+[31m-  {dim: '3d'}[m
+[31m-][m
+[31m-[m
+[31m-export interface dimentionInterface {[m
+[31m-  dim: string;[m
+[31m-}[m
+[31m-[m
+[31m-@Component({[m
+[31m-	moduleId: module.id,[m
+[31m-  selector: "apartment-component",[m
+[31m-  templateUrl: "./apartment.component.html",[m
+[31m-  styleUrls: [ "./apartment.component.css" ][m
+[31m-})[m
+[31m-export class ApartmentComponent {[m
+[31m-   id1: number;       //house id[m
+[31m-   id2: number;       //section id[m
+[31m-   id3: number;       //floor id[m
+[31m- 	 id4: string;       //apartment id[m
+[31m-  private sub: any;[m
+[31m-  active: dimentionInterface = Dimentions[0];[m
+[31m-  dimentions: dimentionInterface[] = Dimentions;[m
+[31m-  apartmentsStorage: ApatrmentInterface[] = ApartmentsStorage;[m
+[31m-  currentApartment: ApatrmentInterface;[m
+[31m-  apartmentSrc: string;[m
+[31m-  constructor(private route: ActivatedRoute, private router: Router, private location: Location) {}[m
+[31m-  ngOnInit() {[m
+[31m- 			this.sub = this.route.params.subscribe(params => {[m
+[31m-      this.id1 = +params['id1']; // (+) converts string 'id' to a number[m
+[31m-      this.id2 = +params['id2'];[m
+[31m-      this.id3 = +params['id3'];[m
+[31m-      this.id4 = params['id4'];[m
+[31m-[m
+[31m-       // In a real app: dispatch action to load.[m
+[31m-    });[m
+[31m-     this.defCurrentApartment();[m
+[31m-  }[m
+[31m-  ngOnDestroy() { this.sub.unsubscribe(); }[m
+[31m-[m
+[31m-  defCurrentApartment() {[m
+[31m-    this.currentApartment = this.apartmentsStorage.find(( apartment ) => {[m
+[31m-      return apartment.id == this.id4 && apartment.section == this.id2;[m
+[31m-    });[m
+[31m-    this.apartmentSrc = this.currentApartment['2d'];[m
+[31m-  }[m
+[31m-[m
+[31m-  changeView(event: any, d: dimentionInterface) {[m
+[31m-    this.active = d;[m
+[31m-    this.apartmentSrc = this.currentApartment[d.dim];[m
+[31m-    // console.log ( this.currentApartment );[m
+[31m-    console.log ( this.apartmentSrc  );[m
+[31m-  }[m
+[31m-[m
+[31m-  goBack() {[m
+[31m-    this.location.back();[m
+[31m-  }[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-}[m
+[31m-[m
+[1mdiff --git a/src/app/app.component.ts b/src/app/app.component.ts[m
+[1mindex 42b3e08..503bf59 100644[m
+[1m--- a/src/app/app.component.ts[m
+[1m+++ b/src/app/app.component.ts[m
+[36m@@ -1,11 +1,10 @@[m
+ import { Component } from '@angular/core';[m
+ [m
+ @Component({[m
+[31m-	moduleId: module.id,[m
+[32m+[m[32m  moduleId: module.id,[m
+   selector: 'my-app',[m
+   template: `[m
+[31m-		<router-outlet></router-outlet>[m
+[32m+[m[32m    <router-outlet></router-outlet>[m
+   `,[m
+ })[m
+[31m-export class AppComponent  {[m
+[31m-}[m
+[32m+[m[32mexport class AppComponent {}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/app.module.ts b/src/app/app.module.ts[m
+[1mindex c9cd481..f3192a2 100644[m
+[1m--- a/src/app/app.module.ts[m
+[1m+++ b/src/app/app.module.ts[m
+[36m@@ -1,56 +1,69 @@[m
+[31m-import { NgModule } 								from '@angular/core';[m
+[31m-import { BrowserModule }						from '@angular/platform-browser';[m
+[31m-import { FormsModule }							from '@angular/forms';[m
+[31m-import { RouterModule }							from '@angular/router';[m
+[31m-import { BrowserAnimationsModule } 	from '@angular/platform-browser/animations';[m
+[31m-[m
+[31m-import { WindowRef } 								from './models/window-ref';[m
+[31m-[m
+[31m-import { AppRoutingModule } 				from './app.routing.module';[m
+[31m-import { AppComponent }							from './app.component';[m
+[31m-import { MainComponent } 						from './main/main.component';[m
+[31m-import { HighlightDirective } 			from './directives/higlight.directive';[m
+[31m-import { SideBarComponent } 				from './sideBar/sideBar.component';[m
+[31m-import { PlanningComponent } 				from './planning/planning.component';[m
+[31m-import { HouseComponent } 					from './house/house.component';[m
+[31m-import { FloorComponent } 					from './floor/floor.component';[m
+[31m-import { ApartmentComponent } 			from './apartment/apartment.component';[m
+[31m-import { NotFoundComponent } from './not-found/not-found.component';[m
+[32m+[m[32mimport { Http, Response, HttpModule } from '@angular/http';[m
+[32m+[m[32mimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';[m
+[32m+[m[32mimport { BrowserModule } from '@angular/platform-browser';[m
+[32m+[m[32mimport { RouterModule } from '@angular/router';[m
+[32m+[m[32mimport { FormsModule } from '@angular/forms';[m
+[32m+[m[32mimport { NgModule } from '@angular/core';[m
+[32m+[m
+[32m+[m[32mimport { ApartmentComponent } from './components/apartment/apartment.component';[m
+[32m+[m[32mimport { NotFoundComponent } from './components/not-found/not-found.component';[m
+[32m+[m[32mimport { PlanningComponent } from './components/planning/planning.component';[m
+[32m+[m[32mimport { AppRoutingModule } from './app.routing.module';[m
+[32m+[m[32mimport { SideBarComponent } from './components/sideBar/sideBar.component';[m
+[32m+[m[32mimport { SvgMenuComponent } from './components/svg-menu/svg-menu.component';[m
+[32m+[m[32mimport { HouseComponent } from './components/house/house.component';[m
+[32m+[m[32mimport { FloorComponent } from './components/floor/floor.component';[m
+[32m+[m[32mimport { MainComponent } from './components/main/main.component';[m
+[32m+[m[32mimport { AppComponent } from './app.component';[m
+[32m+[m
+[32m+[m[32mimport { HighlightDirective } from './directives/higlight.directive';[m
+[32m+[m[32mimport { PolygonDirective } from './directives/polygonDirective';[m
+[32m+[m
+[32m+[m[32mimport { WindowRef } from './models/window-ref';[m
+[32m+[m
+[32m+[m[32mimport { ApatrmentAboutService } from './services/apartment-about/apartment-about.service';[m
+[32m+[m[32mimport { SectionsAboutService } from './services/section/section.service';[m
+ [m
+ @NgModule({[m
+[31m-	// Components, Pipes, Directive[m
+[31m-	declarations: [[m
+[31m-		AppComponent,[m
+[31m-		MainComponent,[m
+[31m-		SideBarComponent,[m
+[31m-		PlanningComponent,[m
+[31m-		HouseComponent,[m
+[31m-		FloorComponent,[m
+[31m-		ApartmentComponent,[m
+[31m-[m
+[31m-		HighlightDirective,[m
+[31m-[m
+[31m-		NotFoundComponent,[m
+[31m-	],[m
+[31m-[m
+[31m-	// Providers[m
+[31m-	providers: [[m
+[31m-		WindowRef[m
+[31m-	],[m
+[31m-[m
+[31m-	// Modules[m
+[31m-	imports: [[m
+[31m-		BrowserModule,[m
+[31m-		FormsModule,[m
+[31m-		RouterModule,[m
+[31m-		AppRoutingModule,[m
+[31m-		BrowserAnimationsModule,[m
+[31m-	],[m
+[31m-[m
+[31m-	// Main Component[m
+[31m-	bootstrap: [ AppComponent	][m
+[32m+[m[32m  // Components, Pipes, Directive[m
+[32m+[m[32m  declarations: [[m
+[32m+[m[32m    ApartmentComponent,[m
+[32m+[m[32m    PlanningComponent,[m
+[32m+[m[32m    NotFoundComponent,[m
+[32m+[m[32m    SideBarComponent,[m
+[32m+[m[32m    SvgMenuComponent,[m
+[32m+[m[32m    HouseComponent,[m
+[32m+[m[32m    FloorComponent,[m
+[32m+[m[32m    MainComponent,[m
+[32m+[m[32m    AppComponent,[m
+[32m+[m
+[32m+[m[32m    HighlightDirective,[m
+[32m+[m[32m    PolygonDirective,[m
+[32m+[m[32m  ],[m
+[32m+[m
+[32m+[m[32m  // Providers[m
+[32m+[m[32m  providers: [[m
+[32m+[m[32m    ApatrmentAboutService,[m
+[32m+[m[32m    SectionsAboutService,[m
+[32m+[m[32m    WindowRef,[m
+[32m+[m[32m  ],[m
+[32m+[m
+[32m+[m[32m  // Modules[m
+[32m+[m[32m  imports: [[m
+[32m+[m[32m    BrowserAnimationsModule,[m
+[32m+[m[32m    BrowserModule,[m
+[32m+[m[32m    RouterModule,[m
+[32m+[m[32m    FormsModule,[m
+[32m+[m[32m    HttpModule,[m
+[32m+[m
+[32m+[m[32m    // moduls created by developper;[m
+[32m+[m[32m    AppRoutingModule,[m
+[32m+[m[32m  ],[m
+[32m+[m
+[32m+[m[32m  // Main Component[m
+[32m+[m[32m  bootstrap: [ AppComponent ][m
+ })[m
+ [m
+ export class AppModule {[m
+[31m-	constructor() { }[m
+[32m+[m[32m  constructor() { }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/app.routing.module.ts b/src/app/app.routing.module.ts[m
+[1mindex 98c6e69..23330b9 100644[m
+[1m--- a/src/app/app.routing.module.ts[m
+[1m+++ b/src/app/app.routing.module.ts[m
+[36m@@ -1,24 +1,23 @@[m
+[31m-import { NgModule }              from '@angular/core';[m
+ import { RouterModule, Routes }  from '@angular/router';[m
+[32m+[m[32mimport { NgModule } from '@angular/core';[m
+ [m
+[31m-import { AppComponent }   		   from './app.component';[m
+[31m-import { MainComponent }         from './main/main.component';[m
+[31m-import { PlanningComponent }     from './planning/planning.component';[m
+[31m-import { HouseComponent }        from './house/house.component';[m
+[31m-import { FloorComponent }        from './floor/floor.component';[m
+[31m-import { ApartmentComponent }    from './apartment/apartment.component';[m
+[31m-import { NotFoundComponent }     from './not-found/not-found.component';[m
+[31m-[m
+[32m+[m[32mimport { ApartmentComponent } from './components/apartment/apartment.component';[m
+[32m+[m[32mimport { PlanningComponent } from './components/planning/planning.component';[m
+[32m+[m[32mimport { NotFoundComponent } from './components/not-found/not-found.component';[m
+[32m+[m[32mimport { HouseComponent } from './components/house/house.component';[m
+[32m+[m[32mimport { FloorComponent } from './components/floor/floor.component';[m
+[32m+[m[32mimport { MainComponent } from './components/main/main.component';[m
+[32m+[m[32mimport { AppComponent } from './app.component';[m
+ [m
+ const routes: Routes = [[m
+[31m-  { path: 'main',  component: MainComponent },[m
+[31m-  { path: 'planning',  component: PlanningComponent },[m
+[31m-  { path: 'house/:id',  component: HouseComponent },[m
+[32m+[m[32m  { path: 'house/:id1/section/:id2/floor/:id3/apartment/:id', component: ApartmentComponent },[m
+   { path: 'house/:id1/section/:id2/floor/:id3', component: FloorComponent },[m
+[31m-  { path: 'house/:id1/section/:id2/floor/:id3/apartment/:id4', component: ApartmentComponent },[m
+[31m-  { path: '', redirectTo: 'main', pathMatch: 'full' },[m
+   { path: 'not-found', component: NotFoundComponent },[m
+[32m+[m[32m  { path: 'planning', component: PlanningComponent },[m
+[32m+[m[32m  { path: 'house/:id', component: HouseComponent },[m
+[32m+[m[32m  { path: 'main', component: MainComponent },[m
+   { path: '**', component: NotFoundComponent },[m
+[32m+[m[32m  { path: '', redirectTo: 'main', pathMatch: 'full' },[m
+ ];[m
+ @NgModule({[m
+   imports: [ RouterModule.forRoot( routes, {[m
+[1mdiff --git a/src/app/components/apartment/apartment.component.css b/src/app/components/apartment/apartment.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..61494e8[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/apartment/apartment.component.css[m
+[36m@@ -0,0 +1,100 @@[m
+[32m+[m[32m.container {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  margin: 0 auto;[m
+[32m+[m[32m  width: 80%;[m
+[32m+[m[32m}[m
+[32m+[m[32m.pick {[m
+[32m+[m[32m  font: 20px serif;[m
+[32m+[m[32m  font-weight: bold;[m
+[32m+[m[32m  color: grey;[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+[32m+[m[32m.pick>span{[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  margin: 20px;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m}[m
+[32m+[m[32m.active {[m
+[32m+[m[32m  color: orange;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.left {[m
+[32m+[m[32m  float: left;[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  width: 47%;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.left h2, div.left h4 {[m
+[32m+[m[32m  margin-left: 20px[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.left img {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  margin: 50px auto;[m
+[32m+[m[32m  width: 90%;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdiv.planing {[m
+[32m+[m[32m  height: 400px;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.left, div.right {[m
+[32m+[m[32m  margin: 20px auto 20px auto;[m
+[32m+[m[32m  padding: 10px 10px 30px 0;[m
+[32m+[m[32m  box-shadow: 10px 10px 43px 1px rgba(0,0,0,0.75);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdiv.right {[m
+[32m+[m[32m  float: right;[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  width: 45%;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdiv.right ul {[m
+[32m+[m[32m  list-style: none;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdiv.right ul>li>div:nth-child(1),[m
+[32m+[m[32mdiv.right ul>li>div:nth-child(2) {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  margin: 0 auto;[m
+[32m+[m[32m  font: 20px;[m
+[32m+[m[32m  font-weight: bold;[m
+[32m+[m[32m  text-transform: capitalize;[m
+[32m+[m[32m  margin-top: 5px;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.right ul>li>div:nth-child(1) {[m
+[32m+[m[32m    float: left;[m
+[32m+[m[32m    width: 60%;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.right ul>li>div:nth-child(2) {[m
+[32m+[m[32m  float: right;[m
+[32m+[m[32m  width: 40%;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mdiv.go_back {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  float: right;[m
+[32m+[m[32m  width: 40%;[m
+[32m+[m[32m  margin: 20px auto;[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.go_back button {[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  width: 100px;[m
+[32m+[m[32m  height: 50px;[m
+[32m+[m[32m  font-size: 20px;[m
+[32m+[m[32m  font-family: serif;[m
+[32m+[m[32m  font-style: italic;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.clear_fix {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  clear: both;[m
+[32m+[m[32m  line-height: 1px;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media screen and (max-width: 750px) {[m
+[32m+[m[32m    div.right, div.left , div.go_back {[m
+[32m+[m[32m      clear: both;[m
+[32m+[m[32m      float:left;[m
+[32m+[m[32m      width: 100%;[m
+[32m+[m[32m      min-width: 500px;[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/apartment/apartment.component.html b/src/app/components/apartment/apartment.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4c4daa2[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/apartment/apartment.component.html[m
+[36m@@ -0,0 +1,36 @@[m
+[32m+[m[32m<div class='container'  *ngIf='currentApartment !== null'>[m
+[32m+[m[32m  <div class="left">[m
+[32m+[m[32m    <div class="note">[m
+[32m+[m[32m        <h2>Огляд квартири</h2>[m
+[32m+[m[32m        <h4 class="changes">Дім №{{id1}}, секція {{id2}}, поверх №{{id3}}, {{currentApartment.roomCount}} кімнатна квартира</h4>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="planing">[m
+[32m+[m[32m        <img class="plan-xD" src="{{apartmentSrc}}" alt="1" >[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="pick">[m
+[32m+[m[32m      <span  *ngFor="let dimention of dimentions"[m
+[32m+[m[32m              [class.active]="active.dim == dimention.dim"[m
+[32m+[m[32m              (click)="changeView(dimention)">{{dimention.dim.toUpperCase()}}</span>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="right">[m
+[32m+[m[32m      <ul>[m
+[32m+[m[32m        <li>[m
+[32m+[m[32m          <div>[m
+[32m+[m[32m            <h2>Площа</h2>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m            <div>[m
+[32m+[m[32m              <h4>м2</h4>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m        </li>[m
+[32m+[m[32m        <li *ngFor='let propVal of currentApartment.aboutApartment'>[m
+[32m+[m[32m          <div>{{propVal.property}}</div>[m
+[32m+[m[32m          <div>{{propVal.value}}</div>[m
+[32m+[m[32m        </li>[m
+[32m+[m[32m      </ul>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="go_back">[m
+[32m+[m[32m      <button (click)='goBack()'>Назад</button>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <br class='clear_fix'/>[m
+[32m+[m[32m</div>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/apartment/apartment.component.ts b/src/app/components/apartment/apartment.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..59dea3d[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/apartment/apartment.component.ts[m
+[36m@@ -0,0 +1,77 @@[m
+[32m+[m[32mimport { Component, OnInit, OnDestroy } from '@angular/core';[m
+[32m+[m[32mimport { ActivatedRoute, Router } from '@angular/router';[m
+[32m+[m[32mimport { Location } from '@angular/common';[m
+[32m+[m
+[32m+[m[32mimport { ApatrmentAboutService } from '../../services/apartment-about/apartment-about.service';[m
+[32m+[m[32mimport { apartmentInterface } from '../../interfaces/apartment.interface';[m
+[32m+[m
+[32m+[m[32mimport * as _ from 'underscore';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  moduleId: module.id,[m
+[32m+[m[32m  selector: "apartment-component",[m
+[32m+[m[32m  templateUrl: "./apartment.component.html",[m
+[32m+[m[32m  styleUrls: [ "./apartment.component.css" ][m
+[32m+[m[32m})[m
+[32m+[m[32mexport class ApartmentComponent {[m
+[32m+[m[32m  private sub: any;[m
+[32m+[m
+[32m+[m[32m  public dimentions: dimentionInterface[] = Dimentions;[m
+[32m+[m[32m  public active: dimentionInterface = Dimentions[0];[m
+[32m+[m[32m  public apartmentsStorage: any = null;[m
+[32m+[m[32m  public currentApartment: any = null;[m
+[32m+[m[32m  public apartmentSrc: string;[m
+[32m+[m[32m  public apartmentId: string;[m
+[32m+[m
+[32m+[m[32m  constructor([m
+[32m+[m[32m    private apatrmentAbout: ApatrmentAboutService,[m
+[32m+[m[32m    private route: ActivatedRoute,[m
+[32m+[m[32m    private location: Location,[m
+[32m+[m[32m    private router: Router,[m
+[32m+[m[32m  ) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit() {[m
+[32m+[m[32m    this.sub = this.route.params.subscribe(params => {[m
+[32m+[m[32m      this.apartmentId = `apartment${params['id']}`;[m
+[32m+[m[32m       // In a real app: dispatch action to load.[m
+[32m+[m[32m    });[m
+[32m+[m[32m    this.getAboutApartmentData().then( res => {[m
+[32m+[m[32m      this.apartmentsStorage = res;[m
+[32m+[m[32m      this.defCurrentApartment();[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  getAboutApartmentData(id:any = null) {[m
+[32m+[m[32m      return this.apatrmentAbout.getApartments( id );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  defCurrentApartment() {[m
+[32m+[m[32m    this.currentApartment = _.find([m
+[32m+[m[32m          this.apartmentsStorage,[m
+[32m+[m[32m          apartment =>_.isEqual(apartment.id, this.apartmentId)[m
+[32m+[m[32m    );[m
+[32m+[m[32m    this.apartmentSrc = this.currentApartment['2d'];[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  changeView(d: dimentionInterface) {[m
+[32m+[m[32m    this.active = d;[m
+[32m+[m[32m    this.apartmentSrc = this.currentApartment[d.dim];[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  goBack() {[m
+[32m+[m[32m    this.location.back();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  ngOnDestroy() { this.sub.unsubscribe(); }[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[32m+[m[32mexport const Dimentions: dimentionInterface[] = [[m
+[32m+[m[32m  {dim: '2d'},[m
+[32m+[m[32m  {dim: '3d'}[m
+[32m+[m[32m][m
+[32m+[m
+[32m+[m[32mexport interface dimentionInterface {[m
+[32m+[m[32m  dim: string;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/floor/floor.component.css b/src/app/components/floor/floor.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d2a7ef7[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/floor/floor.component.css[m
+[36m@@ -0,0 +1,70 @@[m
+[32m+[m[32mdiv.general_planning {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  margin: 0 auto;[m
+[32m+[m[32m  background: url('../../img/step-three-c1.png');[m
+[32m+[m[32m  background-size: 100% 100%;[m
+[32m+[m[32m  background-repeat: no-repeat;[m
+[32m+[m[32m  width: 620px;[m
+[32m+[m[32m  height: 320px;[m
+[32m+[m[32m  z-index: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg {[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  width: 620px;[m
+[32m+[m[32m  height: 320px;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg polygon {[m
+[32m+[m[32m  fill: rgb(200, 200, 200);[m
+[32m+[m[32m  z-index: 2;[m
+[32m+[m[32m  opacity: 0.2;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg polygon:hover {[m
+[32m+[m[32m  fill: rgb(200, 200, 200);[m
+[32m+[m[32m  z-index: 2;[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32mg {[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  margin: 0;[m
+[32m+[m[32m  padding: 0;[m
+[32m+[m[32m}[m
+[32m+[m[32mg.apart {[m
+[32m+[m[32m  stroke: #5A5B5F;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  opacity: 0.1;[m
+[32m+[m[32m  -webkit-transition: .5s;[m
+[32m+[m[32m  transition: .5s;[m
+[32m+[m[32m}[m
+[32m+[m[32mg.apart:hover {[m
+[32m+[m[32m  fill: rgb(200, 200, 200);[m
+[32m+[m[32m  z-index: 9999;[m
+[32m+[m[32m  opacity: .7;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m#floor_selection {[m
+[32m+[m[32m  fill: '#eee';[m
+[32m+[m[32m  opacity: .4;[m
+[32m+[m[32m}[m
+[32m+[m[32m#floor_selection:hover {[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m#floor_selection path:hover {[m
+[32m+[m[32m  fill: '#999'[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32msvg path {[m
+[32m+[m[32m  z-index: 2;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg g {[m
+[32m+[m[32m  z-index: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg path, text {[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg path:hover, svg text:hover {[m
+[32m+[m[32m  fill: #eee;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg text:hover svg path {[m
+[32m+[m[32m  fill: #eee;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/floor/floor.component.html b/src/app/components/floor/floor.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6be76b4[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/floor/floor.component.html[m
+[36m@@ -0,0 +1,25 @@[m
+[32m+[m[32m<main role='main'>[m
+[32m+[m[32m  <div class='general_planning'>[m
+[32m+[m[32m    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"[m
+[32m+[m[32m        xmlns:xlink="http://www.w3.org/1999/xlink" style="display: inline-block;">[m
+[32m+[m[32m       <svg:g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">[m
+[32m+[m[32m          <svg:g>[m
+[32m+[m[32m              <svg:g id="section-1" *ngIf='apartmentsInformation !== null'>[m
+[32m+[m[32m                  <svg:g id="1B" class="apart" data-room="1" data-square="41,05"[m
+[32m+[m[32m                  *ngFor="let apart of apartmentsInformation"[m
+[32m+[m[32m                  (mouseenter)="showData(apart)"[m
+[32m+[m[32m                  (mouseleave)="hideData()">[m
+[32m+[m[32m                    <svg:polygon [attr.points]="replaceSpace(apart.points)"[m
+[32m+[m[32m                        (click)="goToApartment(apart.id)"></svg:polygon>[m
+[32m+[m[32m                  </svg:g>[m
+[32m+[m[32m              </svg:g>[m
+[32m+[m[32m          </svg:g>[m
+[32m+[m[32m      </svg:g>[m
+[32m+[m[32m    </svg>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m  <div *ngIf="aboutApartment">[m
+[32m+[m[32m    <h2 style='text-align: center;'>[m
+[32m+[m[32m      Кількість кімнат: {{aboutApartment.room}} | Загальна площа: {{aboutApartment.square}} м.кв.[m
+[32m+[m[32m    </h2>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m</main>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/floor/floor.component.ts b/src/app/components/floor/floor.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..25eb44f[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/floor/floor.component.ts[m
+[36m@@ -0,0 +1,76 @@[m
+[32m+[m[32mimport { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';[m
+[32m+[m[32mimport { Input, Component, OnInit, OnDestroy } from '@angular/core';[m
+[32m+[m[32mimport { ActivatedRoute, Router }  from '@angular/router';[m
+[32m+[m[32mimport { Location } from '@angular/common';[m
+[32m+[m
+[32m+[m[32mimport { ApatrmentAboutService } from '../../services/apartment-about/apartment-about.service';[m
+[32m+[m[32mimport { apartmentInterface } from '../../interfaces/apartment.interface';[m
+[32m+[m
+[32m+[m[32mimport * as _ from 'underscore';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  moduleId: module.id,[m
+[32m+[m[32m  selector: "floor-component",[m
+[32m+[m[32m  templateUrl: "./floor.component.html",[m
+[32m+[m[32m  styleUrls: [ "./floor.component.css" ],[m
+[32m+[m[32m})[m
+[32m+[m[32mexport class FloorComponent implements OnInit {[m
+[32m+[m[32m  private sub: any;[m
+[32m+[m
+[32m+[m[32m  public apartmentsInformation: any = null;[m
+[32m+[m[32m  public aboutApartment: any;[m
+[32m+[m[32m  public information: string;[m
+[32m+[m
+[32m+[m[32m  public sectionId: string;[m
+[32m+[m[32m  public floorId: string;[m
+[32m+[m[32m  public houseId: string;[m
+[32m+[m
+[32m+[m[32m  constructor([m
+[32m+[m[32m    private apatrmentAbout: ApatrmentAboutService,[m
+[32m+[m[32m    private domSanitizer: DomSanitizer,[m
+[32m+[m[32m    private route: ActivatedRoute,[m
+[32m+[m[32m    private location: Location,[m
+[32m+[m[32m    private router: Router[m
+[32m+[m[32m  ) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit() {[m
+[32m+[m[32m    this.sub = this.route.params.subscribe((params: any) => {[m
+[32m+[m[32m          this.sectionId = params['id1'];[m
+[32m+[m[32m          this.houseId = params['id2'];[m
+[32m+[m[32m          this.floorId = params['id3'];[m
+[32m+[m[32m    });[m
+[32m+[m[32m    this.getAboutApartmentData('apartments').then( res => {[m
+[32m+[m[32m        this.apartmentsInformation = res;[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  showData(apartment) {[m
+[32m+[m[32m      this.aboutApartment = {[m
+[32m+[m[32m        square: apartment.aboutApartment[0].value,[m
+[32m+[m[32m        room: apartment.roomCount,[m
+[32m+[m[32m      }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  replaceSpace(str: string) {[m
+[32m+[m[32m    return str.replace(/ /ig, ",");[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  getAboutApartmentData(id:any = null) {[m
+[32m+[m[32m      return this.apatrmentAbout.getApartments( id );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  hideData() {[m
+[32m+[m[32m    this.aboutApartment = null;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  ngOnDestroy() {[m
+[32m+[m[32m    this.sub.unsubscribe();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  goToApartment(id) {[m
+[32m+[m[32m    let order = id.match(/\d+$/);[m
+[32m+[m[32m    let url = `/house/${this.houseId}/section/${this.sectionId}/floor/${this.floorId}/apartment/${order}`;[m
+[32m+[m[32m    this.router.navigate([url]);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/house/house.component.css b/src/app/components/house/house.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5dbfceb[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/house/house.component.css[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32mdiv.general_planning {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  margin: 0 auto;[m
+[32m+[m[32m  background: url('../../img/step-two-14.png');[m
+[32m+[m[32m  background-size: 100% 100%;[m
+[32m+[m[32m  background-repeat: no-repeat;[m
+[32m+[m[32m  width: 841px;[m
+[32m+[m[32m  height: 340px;[m
+[32m+[m[32m  z-index: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg {[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  width: 841px;[m
+[32m+[m[32m  height: 340px;[m
+[32m+[m[32m}[m
+[32m+[m[32mg.section {[m
+[32m+[m[32m  stroke: #5A5B5F;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  fill: rgb(240, 240, 240);[m
+[32m+[m[32m  opacity: 0.4;[m
+[32m+[m[32m  -webkit-transition: .5s;[m
+[32m+[m[32m  transition: .5s;[m
+[32m+[m[32m}[m
+[32m+[m[32mg.section:hover {[m
+[32m+[m[32m  fill: rgb(200, 200, 200);[m
+[32m+[m[32m  z-index: 9999;[m
+[32m+[m[32m  opacity: .8;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.invisible {[m
+[32m+[m[32m  translate: translate(-1000px, -1000px);[m
+[32m+[m[32m  z-index: -999;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/house/house.component.html b/src/app/components/house/house.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..23cad85[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/house/house.component.html[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m<main role='main'>[m
+[32m+[m[32m  <div class='general_planning'>[m
+[32m+[m[32m  <svg xmlns="http://www.w3.org/2000/svg" >[m
+[32m+[m[32m    <svg:g id="all-section" *ngIf="sections !== null">[m
+[32m+[m[32m      <svg:g *ngFor="let section of sections"[m
+[32m+[m[32m              (click)="makeVisibleSvgMenu(section)">[m
+[32m+[m[32m        <svg:g xmlns="http://www.w3.org/2000/g"  class='section' >[m
+[32m+[m[32m          <svg:polygon  xmlns="http://www.w3.org/2000/polygon"[m
+[32m+[m[32m              [attr.points]="replaceSpace(section.points)" ></svg:polygon>[m
+[32m+[m[32m                <svg:text xmlns="http://www.w3.org/2000/text">[m
+[32m+[m[32m                  <svg:tspan xmlns="http://www.w3.org/2000/tspan"[m
+[32m+[m[32m                      [attr.x]="section.labelX" [attr.y]="section.labelY">{{section.labelText}}</tspan>[m
+[32m+[m[32m                </svg:text>[m
+[32m+[m[32m        </svg:g>[m
+[32m+[m[32m      </svg:g>[m
+[32m+[m[32m      <g svg-menu-component  [class.invisible]="isEqual(null,selectedMenuItem)"></g>[m
+[32m+[m[32m    </svg:g>[m
+[32m+[m[32m  </svg>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m</main>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/house/house.component.ts b/src/app/components/house/house.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8fb5887[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/house/house.component.ts[m
+[36m@@ -0,0 +1,59 @@[m
+[32m+[m[32mimport { Component, OnInit, OnDestroy } from '@angular/core';[m
+[32m+[m[32mimport { ActivatedRoute, Router } from '@angular/router';[m
+[32m+[m
+[32m+[m[32mimport { SectionsAboutService } from '../../services/section/section.service';[m
+[32m+[m[32mimport { SvgMenuComponent } from '../svg-menu/svg-menu.component';[m
+[32m+[m
+[32m+[m[32mimport * as _ from 'underscore';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  moduleId: module.id,[m
+[32m+[m[32m  selector: 'house-component',[m
+[32m+[m[32m  templateUrl: './house.component.html',[m
+[32m+[m[32m  styleUrls: ['./house.component.css'][m
+[32m+[m[32m})[m
+[32m+[m[32mexport class HouseComponent implements OnInit, OnDestroy {[m
+[32m+[m[32m  public selectedMenuItem: any = null;[m
+[32m+[m[32m  private sections: any = null;[m
+[32m+[m[32m  private houseId: number;[m
+[32m+[m[32m  private sub: any;[m
+[32m+[m
+[32m+[m[32m  constructor([m
+[32m+[m[32m    private sectionsService: SectionsAboutService,[m
+[32m+[m[32m    private route: ActivatedRoute,[m
+[32m+[m[32m    private router: Router[m
+[32m+[m[32m  ) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit() {[m
+[32m+[m[32m    this.sub = this.route.params.subscribe(params => {[m
+[32m+[m[32m       this.houseId = +params['id'];[m
+[32m+[m
+[32m+[m[32m      // In a real app: dispatch action to load the details here.[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    this.getSections();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  getSections() {[m
+[32m+[m[32m    this.sectionsService.getSections().then( res => {[m
+[32m+[m[32m      this.sections = res;[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  replaceSpace(str: string) {[m
+[32m+[m[32m    return str.replace(/ /ig, ",");[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  makeVisibleSvgMenu( section ): void {[m
+[32m+[m[32m    this.selectedMenuItem = _.isEqual(section.sectionId, this.selectedMenuItem)[m
+[32m+[m[32m            ? null[m
+[32m+[m[32m            : section.sectionId;[m
+[32m+[m[32m  }[m
+[32m+[m[32m  isEqual(a, b) {[m
+[32m+[m[32m    return _.isEqual(a,b);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  ngOnDestroy() {[m
+[32m+[m[32m    this.sub.unsubscribe();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/main/main.component.css b/src/app/components/main/main.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6370956[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/main/main.component.css[m
+[36m@@ -0,0 +1,60 @@[m
+[32m+[m[32mdiv#background_day, div#background_night, div#content {[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  position: absolute;[m
+[32m+[m[32m  height: 98%;[m
+[32m+[m[32m  width: 99%;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv#background_day {[m
+[32m+[m[32m  background: url('../../img/bg_day.png');[m
+[32m+[m[32m  background-size: cover;[m
+[32m+[m[32m  background-repeat: no-repeat;[m
+[32m+[m[32m  -webkit-transition: 1s ease-in;[m
+[32m+[m[32m  transition: 1s ease-in;[m
+[32m+[m[32m  min-width: 400px;[m
+[32m+[m[32m  min-height: 400px;[m
+[32m+[m[32m  z-index: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv#background_night {[m
+[32m+[m[32m  background: url('../../img/bg_night.png');[m
+[32m+[m[32m  background-size: cover;[m
+[32m+[m[32m  background-repeat: no-repeat;[m
+[32m+[m[32m  min-width: 400px;[m
+[32m+[m[32m  min-height: 400px;[m
+[32m+[m[32m  z-index: 0;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv#background_day, div#background_night {[m
+[32m+[m[32m  background-repeat: no-repeat;[m
+[32m+[m[32m}[m
+[32m+[m[32m#content {[m
+[32m+[m[32m  z-index: 3;[m
+[32m+[m[32m}[m
+[32m+[m[32m#day_or_night {[m
+[32m+[m[32m  position: absolute;[m
+[32m+[m[32m  width: 100px;[m
+[32m+[m[32m  height: 50px;[m
+[32m+[m[32m  margin-bottom: 5px;[m
+[32m+[m[32m  background: black;[m
+[32m+[m[32m  color: white;[m
+[32m+[m[32m  top: 60%;[m
+[32m+[m[32m  left: 45%;[m
+[32m+[m[32m  font-weight: bold;[m
+[32m+[m[32m  letter-spacing: 3px;[m
+[32m+[m[32m  opacity: 0.5;[m
+[32m+[m[32m  -webkit-transition: 1s;[m
+[32m+[m[32m  transition: 1s;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m}[m
+[32m+[m[32m#day_or_night:hover {[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.set_night {[m
+[32m+[m[32m  opacity: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media screen and (max-height: 400px) and (max-width: 400px) {[m
+[32m+[m[32m  #day_or_night {[m
+[32m+[m[32m    margin-left: 50px;[m
+[32m+[m[32m    font-size: 14px;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/main/main.component.html b/src/app/components/main/main.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ac72c5e[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/main/main.component.html[m
+[36m@@ -0,0 +1,14 @@[m
+[32m+[m[32m<main id="fullpage" class="main__pages" role='main'>[m
+[32m+[m[32m   <div id="background_day" [class.set_night]="night"></div>[m
+[32m+[m[32m   <div id="background_night"></div>[m
+[32m+[m[32m   <div id="content">[m
+[32m+[m[32m   <side-bar-component></side-bar-component>[m
+[32m+[m[32m      <div id="day_night">[m
+[32m+[m[32m         <div>[m
+[32m+[m[32m            <button  id='day_or_night'[m
+[32m+[m[32m                     (click)="setDayOrNight()">{{dayNight.toUpperCase()}}</button>[m
+[32m+[m[32m         </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m   </div>[m
+[32m+[m[32m</main>[m
+[32m+[m[32m<router-outlet></router-outlet>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/main/main.component.ts b/src/app/components/main/main.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..940e4d4[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/main/main.component.ts[m
+[36m@@ -0,0 +1,27 @@[m
+[32m+[m[32mimport { Component, Input, OnInit } from '@angular/core';[m
+[32m+[m
+[32m+[m[32mimport { SideBarComponent } from '../sideBar/sideBar.component';[m
+[32m+[m[32mimport { WindowRef } from '../../models/window-ref';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  moduleId: module.id,[m
+[32m+[m[32m  selector: "main-component",[m
+[32m+[m[32m  templateUrl: "./main.component.html",[m
+[32m+[m[32m  styleUrls: [ "./main.component.css" ],[m
+[32m+[m[32m})[m
+[32m+[m[32mexport class MainComponent implements OnInit {[m
+[32m+[m[32m  constructor() {}[m
+[32m+[m
+[32m+[m[32m  public dayNightArray: string[] = [ 'day', 'night' ];[m
+[32m+[m[32m  public night: boolean = true;[m
+[32m+[m[32m  public dayNight: string[m
+[32m+[m
+[32m+[m[32m  ngOnInit() {[m
+[32m+[m[32m    this.setDayOrNight();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  setDayOrNight() {[m
+[32m+[m[32m    this.dayNight = this.dayNightArray[+this.night];[m
+[32m+[m[32m    this.night = !this.night;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/not-found/not-found.component.css b/src/app/components/not-found/not-found.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a31eac9[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/not-found/not-found.component.css[m
+[36m@@ -0,0 +1,3 @@[m
+[32m+[m[32m.text_center {[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/not-found/not-found.component.html b/src/app/components/not-found/not-found.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c86e4fc[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/not-found/not-found.component.html[m
+[36m@@ -0,0 +1,3 @@[m
+[32m+[m[32m<h1 class="text_center">[m
+[32m+[m[32m  The Page you are trying to assign is not available.[m
+[32m+[m[32m</h1>[m
+[1mdiff --git a/src/app/not-found/not-found.component.spec.ts b/src/app/components/not-found/not-found.component.spec.ts[m
+[1msimilarity index 100%[m
+[1mrename from src/app/not-found/not-found.component.spec.ts[m
+[1mrename to src/app/components/not-found/not-found.component.spec.ts[m
+[1mdiff --git a/src/app/not-found/not-found.component.ts b/src/app/components/not-found/not-found.component.ts[m
+[1msimilarity index 100%[m
+[1mrename from src/app/not-found/not-found.component.ts[m
+[1mrename to src/app/components/not-found/not-found.component.ts[m
+[1mdiff --git a/src/app/components/planning/planning.component.css b/src/app/components/planning/planning.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0219bd0[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/planning/planning.component.css[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32mmain {[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+[32m+[m[32mdiv.general_planning {[m
+[32m+[m[32m  position: relative;[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  margin-top: 20px;[m
+[32m+[m[32m  background: url('../../img/complex-plan.png');[m
+[32m+[m[32m  background-size: 100% 100%;[m
+[32m+[m[32m  background-repeat: no-repeat;[m
+[32m+[m[32m  width: 887px;[m
+[32m+[m[32m  height: 604px;[m
+[32m+[m[32m  z-index: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg {[m
+[32m+[m[32m  position: relative;[m
+[32m+[m[32m  width: 100%;[m
+[32m+[m[32m  height: 100%;[m
+[32m+[m[32m}[m
+[32m+[m[32msvg polygon {[m
+[32m+[m[32m      z-index: 2;[m
+[32m+[m[32m}[m
+[32m+[m[32mg {[m
+[32m+[m[32m  stroke: #5A5B5F;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  fill: rgb(240, 240, 240);[m
+[32m+[m[32m  -webkit-transition: .5s;[m
+[32m+[m[32m  transition: .5s;[m
+[32m+[m[32m}[m
+[32m+[m[32mg:hover {[m
+[32m+[m[32m  fill: rgb(200, 200, 200);[m
+[32m+[m[32m  z-index: 9999;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/planning/planning.component.html b/src/app/components/planning/planning.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..35e1efb[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/planning/planning.component.html[m
+[36m@@ -0,0 +1,17 @@[m
+[32m+[m[32m<main role='main'>[m
+[32m+[m[32m  <div class='general_planning'>[m
+[32m+[m[32m    <svg xmlns="http://www.w3.org/2000/svg" fill="transparent">[m
+[32m+[m[32m      <g id="D1" class="house" data-text="Дом №1"[m
+[32m+[m[32m        transform="translate(217.000000, 131) scale(0.95, 1)"[m
+[32m+[m[32m        stroke="#5A5B5F"[m
+[32m+[m[32m        [routerLink]="['/house',1]" >[m
+[32m+[m[32m          <polygon points="91.2094762 1.30338868 91.2094727 49.9745837 80.077901 49.9745837 80.077901 51.6016259 72.0857628 59.5937641 75.1351411 62.6431423 61.4232555 76.3550279 58.1705847 73.1023571 48.6931109 82.579831 48.6931109 93.0296698 26.8012587 93.0296698 26.8012587 99.4308036 16.6072708 99.4308036 16.6072708 92.4643181 0.20630241 92.4643181 0.20630241 79.8856833 2.34669242 79.8856833 2.34669242 61.4994931 22.6113237 41.2348618 17.0533968 35.676935 34.539639 18.1906928 40.0508038 23.7018575 60.0220982 3.73056312 79.4135083 3.73056312 79.4135083 1.30338869"></polygon>[m
+[32m+[m[32m          <polygon  transform="translate(204.501587, 50.063707) scale(-1, 1) translate(-204.501587, -50.063707) " points="250.003174 1 250.00317 49.6711951 238.871599 49.6711951 238.871599 51.2982372 230.87946 59.2903754 233.928839 62.3397536 220.216953 76.0516392 216.964282 72.7989685 207.486808 82.2764423 207.486808 92.7262811 185.594956 92.7262811 185.594956 99.1274149 175.400968 99.1274149 175.400968 92.1609294 159 92.1609294 159 79.5822946 161.14039 79.5822946 161.14039 61.1961044 181.405021 40.9314731 175.847094 35.3735463 193.333337 17.8873041 198.844501 23.3984689 218.815796 3.42717443 238.207206 3.42717443 238.207206 1"></polygon>[m
+[32m+[m[32m          <polygon  points="91.3552246 52.1682972 103.362465 52.1682957 103.362465 59.6450394 115.413831 59.6450394 115.413831 61.3605958 134.950345 61.3605958 134.950345 59.289028 147.052788 59.289028 147.052788 51.9172998 159.056152 51.9173016 159.056152 6.4582285 147.286058 6.27057495 147.286058 0.648353364 134.481703 0.648353364 134.481703 6.45822832 115.951972 6.45822832 115.951972 0.454143916 102.691115 0.454143916 102.691115 6.01691852 91.3552246 6.01691857"></polygon>[m
+[32m+[m[32m        <text id="Dt1" opacity="0.400000006" font-size="24" letter-spacing="2" fill="#738289">[m
+[32m+[m[32m            <tspan x="110" y="40">Д1</tspan>[m
+[32m+[m[32m        </text>[m
+[32m+[m[32m      </g>[m
+[32m+[m[32m    </svg>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m</main>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/planning/planning.component.ts b/src/app/components/planning/planning.component.ts[m
+[1msimilarity index 55%[m
+[1mrename from src/app/planning/planning.component.ts[m
+[1mrename to src/app/components/planning/planning.component.ts[m
+[1mindex 5995ace..b0a405e 100644[m
+[1m--- a/src/app/planning/planning.component.ts[m
+[1m+++ b/src/app/components/planning/planning.component.ts[m
+[36m@@ -1,24 +1,11 @@[m
+ import { Component } from "@angular/core";[m
+ [m
+ @Component({[m
+[31m-	moduleId: module.id,[m
+[32m+[m[32m  moduleId: module.id,[m
+   selector: "planning-component",[m
+   templateUrl: "./planning.component.html",[m
+   styleUrls: [ "./planning.component.css" ][m
+ })[m
+ export class PlanningComponent {[m
+[31m-	houses: House[] = Houses;[m
+[31m-  constructor( ) {[m
+[31m-  }[m
+[32m+[m[32m  constructor() {}[m
+ }[m
+[31m-[m
+[31m-export const Houses: House[] = [[m
+[31m-	{	id: 1 },[m
+[31m-	{	id: 2 },[m
+[31m-][m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-export interface House {[m
+[31m-	id: number;[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/sideBar/sideBar.component.css b/src/app/components/sideBar/sideBar.component.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7b4fd7c[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/sideBar/sideBar.component.css[m
+[36m@@ -0,0 +1,82 @@[m
+[32m+[m[32m.sidenav {[m
+[32m+[m[32m  opacity: .6;[m
+[32m+[m[32m  position: relative;[m
+[32m+[m[32m  margin-top: 20px;[m
+[32m+[m[32m  left: 10px;[m
+[32m+[m[32m  width: 180px;[m
+[32m+[m[32m  height: 300px;[m
+[32m+[m[32m  font-size: 15px;[m
+[32m+[m[32m  -webkit-transition: 0.5s;[m
+[32m+[m[32m  transition: 0.5s;[m
+[32m+[m[32m  overflow: hidden;[m
+[32m+[m[32m  z-index: 1;[m
+[32m+[m[32m}[m
+[32m+[m[32m.sidenav:hover {[m
+[32m+[m[32m  opacity: .7;[m
+[32m+[m[32m  background: black;[m
+[32m+[m[32m}[m
+[32m+[m[32m.sidenav a {[m
+[32m+[m[32m  padding: 6px 6px 6px 32px;[m
+[32m+[m[32m  text-decoration: none;[m
+[32m+[m[32m  font-size: 20px;[m
+[32m+[m[32m  color: gold;[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  -webkit-transition: 0.3s;[m
+[32m+[m[32m  transition: 0.3s;[m
+[32m+[m[32m  font-family: "Lato", sans-serif;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m}[m
+[32m+[m[32m.sidenav a:hover{[m
+[32m+[m[32m  display: block;[m
+[32m+[m[32m  outline: 2px solid white;[m
+[32m+[m[32m  border-left: 2px solid white;[m
+[32m+[m[32m  border-right: 2px solid white;[m
+[32m+[m[32m  color: white;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.openNav, .openNav>span {[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  margin: 0;[m
+[32m+[m[32m}[m
+[32m+[m[32m.openNav {[m
+[32m+[m[32m  width: 220px;[m
+[32m+[m[32m  color: gold;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  opacity: 0.5;[m
+[32m+[m[32m  font-size: 40px;[m
+[32m+[m[32m  -webkit-transition: 1s;[m
+[32m+[m[32m  transition: 1s;[m
+[32m+[m[32m}[m
+[32m+[m[32m.menuText {[m
+[32m+[m[32m  width: 0px;[m
+[32m+[m[32m  opacity: 0;[m
+[32m+[m[32m  text-transform: uppercase;[m
+[32m+[m[32m  -webkit-transition: 1s;[m
+[32m+[m[32m  transition: 1s;[m
+[32m+[m[32m}[m
+[32m+[m[32m.hide_to_left {[m
+[32m+[m[32m  display: inline-block;[m
+[32m+[m[32m  width: 50px;[m
+[32m+[m[32m  opacity: 0;[m
+[32m+[m[32m  -webkit-transition: 1s;[m
+[32m+[m[32m  transition: 1s;[m
+[32m+[m[32m}[m
+[32m+[m[32m.openNav:hover>.hide_to_left {[m
+[32m+[m[32m  width: 0;[m
+[32m+[m[32m}[m
+[32m+[m[32m.openNav:hover>.menuText, .menuText:hover {[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m  width: 120px;[m
+[32m+[m[32m}[m
+[32m+[m[32m.openNav:hover {[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media screen and (max-height: 400px) {[m
+[32m+[m[32m  .sidenav { height: 220px; width: 140px}[m
+[32m+[m[32m  .sidenav a {font-size: 16px;}[m
+[32m+[m[32m  .openNav { font-size: 30px; }[m
+[32m+[m[32m  .openNav:hover>.menuText, .menuText:hover {[m
+[32m+[m[32m    width: 95px;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/sideBar/sideBar.component.html b/src/app/components/sideBar/sideBar.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8ba036e[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/sideBar/sideBar.component.html[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32m<div id="mySidenav" class="sidenav" #slideNavInstanse>[m
+[32m+[m[32m  <a routerLink="/planning">Planning</a>[m
+[32m+[m[32m</div>[m
+[32m+[m
+[32m+[m[32m<div class='openNav' #openNavInstance[m
+[32m+[m[32m      (click)="openCloseNav( openNavInstance, slideNavInstanse )">[m
+[32m+[m[32m  <span class='hide_to_left'>MENU </span><span>&#9776; </span><span class='menuText'> меню </span> <span>&#9776;</span>[m
+[32m+[m[32m</div>[m
+[32m+[m[32m<router-outlet></router-outlet>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/sideBar/sideBar.component.ts b/src/app/components/sideBar/sideBar.component.ts[m
+[1msimilarity index 75%[m
+[1mrename from src/app/sideBar/sideBar.component.ts[m
+[1mrename to src/app/components/sideBar/sideBar.component.ts[m
+[1mindex 8fe59d1..be3999b 100644[m
+[1m--- a/src/app/sideBar/sideBar.component.ts[m
+[1m+++ b/src/app/components/sideBar/sideBar.component.ts[m
+[36m@@ -1,7 +1,7 @@[m
+ import { Component } from "@angular/core";[m
+[31m-import { WindowRef  } from '../models/window-ref';[m
+[32m+[m[32mimport { WindowRef  } from '../../models/window-ref';[m
+ @Component({[m
+[31m-	moduleId: module.id,[m
+[32m+[m[32m  moduleId: module.id,[m
+   selector: "side-bar-component",[m
+   templateUrl: "./sideBar.component.html",[m
+   styleUrls: [ "./sideBar.component.css" ][m
+[36m@@ -12,7 +12,7 @@[m [mexport class SideBarComponent {[m
+   navHeight: number = 300;[m
+   openCloseNav( openNavInstance: HTMLElement, slideNavInstance: HTMLElement ) {[m
+     let height: number = this.windowRef.nativeWindow.innerHeight;[m
+[31m-  	this.navHeight =  this.navHeight === 0 ? ( height >= 400 ? 300 : 220 ) : 0;[m
+[32m+[m[32m    this.navHeight =  this.navHeight === 0 ? ( height >= 400 ? 300 : 220 ) : 0;[m
+     slideNavInstance.style.height =  `${this.navHeight}px`;[m
+   }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/svg-menu/svg-menu.component.html b/src/app/components/svg-menu/svg-menu.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5205b94[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/svg-menu/svg-menu.component.html[m
+[36m@@ -0,0 +1,37 @@[m
+[32m+[m[32m<svg:g class='menu_floor'>[m
+[32m+[m[32m  <svg:g>[m
+[32m+[m[32m    <svg:path d="M170,170  L 124.04,124.04  Q 145.13,109.95 170,105 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="154.09" y="131.59" font-size="10">1</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g class='menu_floor_selection'>[m
+[32m+[m[32m    <svg:path d="M170,170  L 170,105  Q 194.87,109.95 215.96,124.04 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="185.91" y="131.59" font-size="10">2</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g class='menu_floor_selection' (click)="goToFloor()" >[m
+[32m+[m[32m    <svg:path d="M170,170  L 215.96,124.04  Q 230.05,145.13 235,170 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="208.41" y="154.09" font-size="10">3</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g class='menu_floor_selection'>[m
+[32m+[m[32m    <svg:path d="M170,170  L 235,170  Q 230.05,194.87 215.96,215.96 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="208.41" y="185.91" font-size="10">4</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g class='menu_floor_selection'>[m
+[32m+[m[32m    <svg:path d="M170,170  L 215.96,215.96  Q 194.87,230.05 170,235 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="185.91" y="208.41" font-size="10">5</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g class='menu_floor_selection'>[m
+[32m+[m[32m    <svg:path d="M170,170  L 170,235  Q 145.13,230.05 124.04,215.96 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="154.09" y="208.41" font-size="10">6</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g class='menu_floor_selection'>[m
+[32m+[m[32m    <svg:path d="M170,170  L 124.04,215.96  Q 109.95,194.87 105,170 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="131.59" y="185.91" font-size="10">7</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:g>[m
+[32m+[m[32m    <svg:path d="M170,170  L 105,170  Q 109.95,145.13 124.04,124.04 Z" fill="white" stroke="grey"></path>[m
+[32m+[m[32m    <svg:text x="131.59" y="154.09" font-size="10">8</text>[m
+[32m+[m[32m  </svg:g>[m
+[32m+[m[32m  <svg:circle cx="170" cy="170" r="25" fill="white" stroke="grey"></circle>[m
+[32m+[m[32m</svg:g>[m
+[32m+[m[32m<router-outlet></router-outlet>[m
+[32m+[m[32m<ng-content></ng-content>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/svg-menu/svg-menu.component.scss b/src/app/components/svg-menu/svg-menu.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..740b604[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/svg-menu/svg-menu.component.scss[m
+[36m@@ -0,0 +1,28 @@[m
+[32m+[m[32mg.menu_floor {[m
+[32m+[m[32m  -webkit-transition: .5s;[m
+[32m+[m[32m  transition: .5s;[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32msvg g>path {[m
+[32m+[m[32m  z-index: 2;[m
+[32m+[m[32m  -webkit-transition: .5s;[m
+[32m+[m[32m  transition: .5s;[m
+[32m+[m[32m  webkit-transition: .5s;[m
+[32m+[m[32m}[m
+[32m+[m[32mg.menu_floor_selection {[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  z-index: 3;[m
+[32m+[m[32m}[m
+[32m+[m[32mg.menu_floor_selection:hover {[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mg.menu_floor_selection:hover>path {[m
+[32m+[m[32m  fill: #eee;[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.make_visible {[m
+[32m+[m[32m  opacity: 1;[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/components/svg-menu/svg-menu.component.ts b/src/app/components/svg-menu/svg-menu.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..557a612[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/svg-menu/svg-menu.component.ts[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32mimport { Component, OnInit, OnDestroy } from '@angular/core';[m
+[32m+[m[32mimport { ActivatedRoute, Router } from '@angular/router';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  moduleId: module.id,[m
+[32m+[m[32m  selector: "g[svg-menu-component]",[m
+[32m+[m[32m  templateUrl: "./svg-menu.component.html",[m
+[32m+[m[32m  styleUrls: [ "./svg-menu.component.scss" ][m
+[32m+[m[32m})[m
+[32m+[m[32mexport class SvgMenuComponent {[m
+[32m+[m[32m  // private sub: any;[m
+[32m+[m[32m  constructor([m
+[32m+[m[32m    private router: Router[m
+[32m+[m[32m  ) {}[m
+[32m+[m
+[32m+[m[32m  goToFloor() {[m
+[32m+[m[32m    let url = `/house/${1}/section/${1}/floor/${3}`;[m
+[32m+[m[32m    this.router.navigate([url]);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment1.json b/src/app/data/about-apartment/apartment1.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c477a50[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment1.json[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа",  "value": "73.06"},[m
+[32m+[m[32m  {"property": "Жила площа", "value": "29.82"},[m
+[32m+[m[32m  {"property": "living room",  "value": "12.61"},[m
+[32m+[m[32m  {"property": "bedroom",  "value": "17.21"},[m
+[32m+[m[32m  {"property": "kitchen",  "value": "25.36"},[m
+[32m+[m[32m  {"property": "bathroom 1", "value": "4.44"},[m
+[32m+[m[32m  {"property": "bathroom 2", "value": "1.75"},[m
+[32m+[m[32m  {"property": "hallway",  "value": "8.09"},[m
+[32m+[m[32m  {"property": "balcony",  "value": "3.6"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment2.json b/src/app/data/about-apartment/apartment2.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ec74ad4[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment2.json[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа", "value": "51.68"},[m
+[32m+[m[32m  {"property": "Жила площа", "value": "24.12"},[m
+[32m+[m[32m  {"property": "гостьова", "value": "12.68"},[m
+[32m+[m[32m  {"property": "спальня", "value": "11.64"},[m
+[32m+[m[32m  {"property": "гостьова", "value": "10.28"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "4.67"},[m
+[32m+[m[32m  {"property": "вітальня", "value": "5.46"},[m
+[32m+[m[32m  {"property": "гардероб", "value": "1.96"},[m
+[32m+[m[32m  {"property": "балкон",  "value": "5.19"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment3.json b/src/app/data/about-apartment/apartment3.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9b43062[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment3.json[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа",  "value": "44.68"},[m
+[32m+[m[32m  {"property": "Жила площа",  "value": "20.06"},[m
+[32m+[m[32m  {"property": "спальня", "value": "20.06"},[m
+[32m+[m[32m  {"property": "кухня", "value": "10.47"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "3.77"},[m
+[32m+[m[32m  {"property": "вітальня", "value": "4.48"},[m
+[32m+[m[32m  {"property": "гардероб", "value": "2.31"},[m
+[32m+[m[32m  {"property": "балкон",  "value": "3.60"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment4.json b/src/app/data/about-apartment/apartment4.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d647106[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment4.json[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m    {"property": "Загальна площа", "value": "44.68"},[m
+[32m+[m[32m    {"property": "Жила площа", "value": "20.06"},[m
+[32m+[m[32m    {"property": "спальня", "value": "20.06"},[m
+[32m+[m[32m    {"property": "кухня", "value": "10.47"},[m
+[32m+[m[32m    {"property": "санвузол", "value": "3.77"},[m
+[32m+[m[32m    {"property": "вітальня", "value": "4.48"},[m
+[32m+[m[32m    {"property": "гардероб", "value": "2.31"},[m
+[32m+[m[32m    {"property": "балкон", "value": "3.60"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment5.json b/src/app/data/about-apartment/apartment5.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2c1bd5e[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment5.json[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа", "value": "54.04"},[m
+[32m+[m[32m  {"property": "Жила площа", "value": "25.21"},[m
+[32m+[m[32m  {"property": "гостьова", "value": "13.57"},[m
+[32m+[m[32m  {"property": "спальня", "value": "11.64"},[m
+[32m+[m[32m  {"property": "кухня", "value": "10.28"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "4.70"},[m
+[32m+[m[32m  {"property": "вітальня", "value": "5.86"},[m
+[32m+[m[32m  {"property": "гардероб", "value": "2.80"},[m
+[32m+[m[32m  {"property": "балкон", "value": "5.19"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment6.json b/src/app/data/about-apartment/apartment6.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..76d9582[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment6.json[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа", "value": "73.06"},[m
+[32m+[m[32m  {"property": "Жила площа", "value": "29.82"},[m
+[32m+[m[32m  {"property": "гостьова", "value": "12.61"},[m
+[32m+[m[32m  {"property": "спальня", "value": "17.21"},[m
+[32m+[m[32m  {"property": "кухня", "value": "25.36"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "4.44"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "1.75"},[m
+[32m+[m[32m  {"property": "вітальня", "value": "8.09"},[m
+[32m+[m[32m  {"property": "балкон", "value": "3.60"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment7.json b/src/app/data/about-apartment/apartment7.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7355c53[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment7.json[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа", "value": "38.99"},[m
+[32m+[m[32m  {"property": "Жила площа", "value": "16.17"},[m
+[32m+[m[32m  {"property": "спальня", "value": "16.17"},[m
+[32m+[m[32m  {"property": "кухня", "value": "10.27"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "3.94"},[m
+[32m+[m[32m  {"property": "вітальня", "value": "5.27"},[m
+[32m+[m[32m  {"property": "балкон", "value": "3.34"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartment8.json b/src/app/data/about-apartment/apartment8.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..23fd779[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartment8.json[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {"property": "Загальна площа", "value": "41.05"},[m
+[32m+[m[32m  {"property": "Жила площа", "value": "16.28"},[m
+[32m+[m[32m  {"property": "спальня", "value": "16.28"},[m
+[32m+[m[32m  {"property": "кухня", "value": "8.83"},[m
+[32m+[m[32m  {"property": "санвузол", "value": "4.10"},[m
+[32m+[m[32m  {"property": "вітальня", "value": "7.56"},[m
+[32m+[m[32m  {"property": "балкон", "value": "4.28"}[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/about-apartment/apartments.json b/src/app/data/about-apartment/apartments.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..28ef294[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/about-apartment/apartments.json[m
+[36m@@ -0,0 +1,156 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment1",[m
+[32m+[m[32m    "roomCount": "2",[m
+[32m+[m[32m    "label": "2Б",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_2V-2.png",[m
+[32m+[m[32m    "3d": "src/app/img/apartments/C1_3D_2V-2.png",[m
+[32m+[m[32m    "points": "75.0662 255.295 78.1063 252.255 108.071 281.785 113.284 276.577 121.098 284.394 131.088 284.394 144.551 270.059 138.038 263.546 162.358 239.658 132.827 211.431 148.027 196.233 45.1005 93.7412 1.67195 137.171 54.6549 190.585 32.9406 212.302",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m        {"property": "Загальна площа",  "value": "73.06"},[m
+[32m+[m[32m        {"property": "Жила площа", "value": "29.82"},[m
+[32m+[m[32m        {"property": "living room",  "value": "12.61"},[m
+[32m+[m[32m        {"property": "bedroom",  "value": "17.21"},[m
+[32m+[m[32m        {"property": "kitchen",  "value": "25.36"},[m
+[32m+[m[32m        {"property": "bathroom 1", "value": "4.44"},[m
+[32m+[m[32m        {"property": "bathroom 2", "value": "1.75"},[m
+[32m+[m[32m        {"property": "hallway",  "value": "8.09"},[m
+[32m+[m[32m        {"property": "balcony",  "value": "3.6"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment2",[m
+[32m+[m[32m    "roomCount": "2",[m
+[32m+[m[32m    "label": "2A",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_2A-2.png",[m
+[32m+[m[32m    "3d": "src/app/img/apartments/C1_3D_2A-2.png",[m
+[32m+[m[32m    "points": "436.662 318.175 410.513 292.469 410.513 288.923 398.546 288.923 391.456 282.277 391.456 268.093 354.228 268.093 354.228 171.477 432.673 171.477 450.402 188.762 475.218 163.943 494.277 182.556 583.359 93.918 622.358 132.035",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m      {"property": "Загальна площа", "value": "51.68"},[m
+[32m+[m[32m      {"property": "Жила площа", "value": "24.12"},[m
+[32m+[m[32m      {"property": "гостьова", "value": "12.68"},[m
+[32m+[m[32m      {"property": "спальня", "value": "11.64"},[m
+[32m+[m[32m      {"property": "гостьова", "value": "10.28"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "4.67"},[m
+[32m+[m[32m      {"property": "вітальня", "value": "5.46"},[m
+[32m+[m[32m      {"property": "гардероб", "value": "1.96"},[m
+[32m+[m[32m      {"property": "балкон",  "value": "5.19"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment3",[m
+[32m+[m[32m    "roomCount": "1",[m
+[32m+[m[32m    "label": "1B",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_1V-2.png",[m
+[32m+[m[32m    "3d":"src/app/img/apartments/C1_3D_1V.png",[m
+[32m+[m[32m    "points": "128.558 176.382 159.709 145.669 201.831 145.669 201.831 45.1922 191.738 45.1922 191.738 36.856 114.517 36.856 100.475 50.4575 91.2621 41.2434 82.0482 41.2434 73.7117 49.58 65.3752 41.6824 29.8358 77.6606",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m      {"property": "Загальна площа",  "value": "44.68"},[m
+[32m+[m[32m      {"property": "Жила площа",  "value": "20.06"},[m
+[32m+[m[32m      {"property": "спальня", "value": "20.06"},[m
+[32m+[m[32m      {"property": "кухня", "value": "10.47"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "3.77"},[m
+[32m+[m[32m      {"property": "вітальня", "value": "4.48"},[m
+[32m+[m[32m      {"property": "гардероб", "value": "2.31"},[m
+[32m+[m[32m      {"property": "балкон",  "value": "3.60"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment4",[m
+[32m+[m[32m    "roomCount": "1",[m
+[32m+[m[32m    "label": "1Г",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_1G-2.png",[m
+[32m+[m[32m    "3d":"src/app/img/apartments/C1_3D_2G.png",[m
+[32m+[m[32m    "points": "128.558 176.382 159.709 145.669 201.831 145.669 201.831 45.1922 191.738 45.1922 191.738 36.856 114.517 36.856 100.475 50.4575 91.2621 41.2434 82.0482 41.2434 73.7117 49.58 65.3752 41.6824 29.8358 77.6606",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m        {"property": "Загальна площа", "value": "44.68"},[m
+[32m+[m[32m        {"property": "Жила площа", "value": "20.06"},[m
+[32m+[m[32m        {"property": "спальня", "value": "20.06"},[m
+[32m+[m[32m        {"property": "кухня", "value": "10.47"},[m
+[32m+[m[32m        {"property": "санвузол", "value": "3.77"},[m
+[32m+[m[32m        {"property": "вітальня", "value": "4.48"},[m
+[32m+[m[32m        {"property": "гардероб", "value": "2.31"},[m
+[32m+[m[32m        {"property": "балкон", "value": "3.60"}[m
+[32m+[m[32m      ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment5",[m
+[32m+[m[32m    "roomCount": "2",[m
+[32m+[m[32m    "label": "2В",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_2B-2.png",[m
+[32m+[m[32m    "3d":"src/app/img/apartments/C1_3D_2B.png",[m
+[32m+[m[32m    "points": "492.282 184.784 455.873 149.69 455.873 149.69 418.147 149.78 418.147 149.69 417.417 115.125 418.147 49.2336 418.147 49.2336 428.236 49.2336 428.236 40.4603 504.124 40.4603 522.109 57.5683 530.885 48.7948 540.096 48.7948 548.431 57.1296 556.767 48.7948 592.298 85.2048 492.282 179.519",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m      {"property": "Загальна площа", "value": "54.04"},[m
+[32m+[m[32m      {"property": "Жила площа", "value": "25.21"},[m
+[32m+[m[32m      {"property": "гостьова", "value": "13.57"},[m
+[32m+[m[32m      {"property": "спальня", "value": "11.64"},[m
+[32m+[m[32m      {"property": "кухня", "value": "10.28"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "4.70"},[m
+[32m+[m[32m      {"property": "вітальня", "value": "5.86"},[m
+[32m+[m[32m      {"property": "гардероб", "value": "2.80"},[m
+[32m+[m[32m      {"property": "балкон", "value": "5.19"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment6",[m
+[32m+[m[32m    "roomCount": "2",[m
+[32m+[m[32m    "label": "2В",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_2V-2.png",[m
+[32m+[m[32m    "3d": "src/app/img/apartments/C1_3D_2V-2.png",[m
+[32m+[m[32m    "points": "202.268 44.3149 202.268 145.669 306.522 145.669 306.522 0 245.269 0 245.269 7.45893 211.482 7.45893 211.482 17.1117 199.196 17.1117 192.176 24.1319 192.176 44.3149",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m      {"property": "Загальна площа", "value": "73.06"},[m
+[32m+[m[32m      {"property": "Жила площа", "value": "29.82"},[m
+[32m+[m[32m      {"property": "гостьова", "value": "12.61"},[m
+[32m+[m[32m      {"property": "спальня", "value": "17.21"},[m
+[32m+[m[32m      {"property": "кухня", "value": "25.36"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "4.44"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "1.75"},[m
+[32m+[m[32m      {"property": "вітальня", "value": "8.09"},[m
+[32m+[m[32m      {"property": "балкон", "value": "3.60"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment7",[m
+[32m+[m[32m    "roomCount": "1",[m
+[32m+[m[32m    "label": "1A",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_1A-2-1.png",[m
+[32m+[m[32m    "3d": "src/app/img/apartments/C1_3D_1A-2.png",[m
+[32m+[m[32m    "points": "416.066 41.7313 416.066 146.187 308.622 146.187 308.622 -3.94 371.751 -3.94 371.751 3.7472 406.57 3.7472 406.57 13.6955 419.231 13.6955 426.465 20.9306 426.465 41.7313",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m      {"property": "Загальна площа", "value": "38.99"},[m
+[32m+[m[32m      {"property": "Жила площа", "value": "16.17"},[m
+[32m+[m[32m      {"property": "спальня", "value": "16.17"},[m
+[32m+[m[32m      {"property": "кухня", "value": "10.27"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "3.94"},[m
+[32m+[m[32m      {"property": "вітальня", "value": "5.27"},[m
+[32m+[m[32m      {"property": "балкон", "value": "3.34"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "section": "1",[m
+[32m+[m[32m    "id": "apartment8",[m
+[32m+[m[32m    "roomCount": "1",[m
+[32m+[m[32m    "label": "1Б",[m
+[32m+[m[32m    "2d": "src/app/img/apartments/C1_2D_1B-2.png",[m
+[32m+[m[32m    "3d": "src/app/img/apartments/C1_3D_1B-2.png",[m
+[32m+[m[32m    "points": "147.766 197.01 173.284 171.045 267.297 170.599 267.297 268.192 229.233 268.192 229.233 282.513 222.461 289.283 209.986 289.283 209.986 292.811 185.136 317.664 168.35 300.877 164.779 304.453 138.814 278.487 144.633 272.667 137.918 265.952 162.542 241.778 132.546 212.232",[m
+[32m+[m[32m    "aboutApartment": [[m
+[32m+[m[32m      {"property": "Загальна площа", "value": "41.05"},[m
+[32m+[m[32m      {"property": "Жила площа", "value": "16.28"},[m
+[32m+[m[32m      {"property": "спальня", "value": "16.28"},[m
+[32m+[m[32m      {"property": "кухня", "value": "8.83"},[m
+[32m+[m[32m      {"property": "санвузол", "value": "4.10"},[m
+[32m+[m[32m      {"property": "вітальня", "value": "7.56"},[m
+[32m+[m[32m      {"property": "балкон", "value": "4.28"}[m
+[32m+[m[32m    ][m
+[32m+[m[32m  }[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/data/apartments.storage.ts b/src/app/data/apartments.storage.ts[m
+[1mdeleted file mode 100644[m
+[1mindex 3695335..0000000[m
+[1m--- a/src/app/data/apartments.storage.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,164 +0,0 @@[m
+[31m-export const ApartmentsStorage: ApatrmentInterface[] = [[m
+[31m-	{[m
+[31m-		section: 1,		id: '2B',[m
+[31m-		'roomCount': 2,[m
+[31m-		'label': '2Б',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_2V-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_2V-2.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 73.06	},[m
+[31m-				{		property: 'Жила площа', value: 29.82	},[m
+[31m-[m
+[31m-				{		property: 'living room', 	value: 12.61	},[m
+[31m-				{		property: 'bedroom', 			value: 17.21	},[m
+[31m-				{		property: 'kitchen', 			value: 25.36	},[m
+[31m-				{		property: 'bathroom 1', 	value: 4.44	},[m
+[31m-				{		property: 'bathroom 2', 	value: 1.75	},[m
+[31m-				{		property: 'hallway', 			value: 8.09	},[m
+[31m-				{		property: 'balcony', 			value: 3.60	},[m
+[31m-			][m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '2A',[m
+[31m-		'roomCount': 2,[m
+[31m-		'label': '2A',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_2A-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_2A-2.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 51.68	},[m
+[31m-				{		property: 'Жила площа', 			value: 24.12	},[m
+[31m-[m
+[31m-				{		property: 'гостьова', 				value: 12.68	},[m
+[31m-				{		property: 'спальня', 					value: 11.64	},[m
+[31m-				{		property: 'гостьова', 				value: 10.28	},[m
+[31m-				{		property: 'санвузол', 				value: 4.67	},[m
+[31m-				{		property: 'вітальня', 				value: 5.46	},[m
+[31m-				{		property: 'гардероб', 				value: 1.96	},[m
+[31m-				{		property: 'балкон', 					value: 5.19	},[m
+[31m-		][m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '1V',[m
+[31m-		'roomCount': 1,[m
+[31m-		'label': '1B',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_1V-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_1V.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 44.68	},[m
+[31m-				{		property: 'Жила площа', 			value: 20.06	},[m
+[31m-[m
+[31m-				{		property: 'спальня', 				value: 20.06	},[m
+[31m-				{		property: 'кухня', 					value: 10.47	},[m
+[31m-				{		property: 'санвузол', 				value: 3.77	},[m
+[31m-				{		property: 'вітальня', 				value: 4.48	},[m
+[31m-				{		property: 'гардероб', 				value: 2.31	},[m
+[31m-				{		property: 'балкон', 					value: 3.60	},[m
+[31m-		][m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '1G',[m
+[31m-		'roomCount': 1,[m
+[31m-		'label': '1Г',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_1G-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_2G.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 44.68	},[m
+[31m-				{		property: 'Жила площа', 			value: 20.06	},[m
+[31m-[m
+[31m-				{		property: 'спальня', 				value: 20.06	},[m
+[31m-				{		property: 'кухня', 					value: 10.47	},[m
+[31m-				{		property: 'санвузол', 				value: 3.77	},[m
+[31m-				{		property: 'вітальня', 				value: 4.48	},[m
+[31m-				{		property: 'гардероб', 				value: 2.31	},[m
+[31m-				{		property: 'балкон', 					value: 3.60	},[m
+[31m-		][m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '2V',[m
+[31m-		'roomCount': 2,[m
+[31m-		'label': '2В',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_2B-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_2B.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 54.04	},[m
+[31m-				{		property: 'Жила площа', 			value: 25.21	},[m
+[31m-[m
+[31m-				{		property: 'гостьова', 				value: 13.57	},[m
+[31m-				{		property: 'спальня', 				value: 11.64	},[m
+[31m-				{		property: 'кухня', 					value: 10.28	},[m
+[31m-				{		property: 'санвузол', 				value: 4.70	},[m
+[31m-				{		property: 'вітальня', 				value: 5.86	},[m
+[31m-				{		property: 'гардероб', 				value: 2.80	},[m
+[31m-				{		property: 'балкон', 					value: 5.19	},[m
+[31m-		][m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '2V',[m
+[31m-		'roomCount': 2,[m
+[31m-		'label': '2В',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_2V-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_2V-2.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 73.06	},[m
+[31m-				{		property: 'Жила площа', 			value: 29.82	},[m
+[31m-[m
+[31m-				{		property: 'гостьова', 				value: 12.61	},[m
+[31m-				{		property: 'спальня', 				value: 17.21	},[m
+[31m-				{		property: 'кухня', 					value: 25.36	},[m
+[31m-				{		property: 'санвузол', 				value: 4.44	},[m
+[31m-				{		property: 'санвузол', 				value: 1.75	},[m
+[31m-				{		property: 'вітальня', 				value: 8.09	},[m
+[31m-				{		property: 'балкон', 					value: 3.60	},[m
+[31m-		][m
+[31m-[m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '1A',[m
+[31m-		'roomCount': 1,[m
+[31m-		'label': '1A',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_1A-2-1.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_1A-2.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 38.99	},[m
+[31m-				{		property: 'Жила площа', 			value: 16.17	},[m
+[31m-[m
+[31m-				{		property: 'спальня', 				value: 16.17	},[m
+[31m-				{		property: 'кухня', 					value: 10.27	},[m
+[31m-				{		property: 'санвузол', 				value: 3.94	},[m
+[31m-				{		property: 'вітальня', 				value: 5.27	},[m
+[31m-				{		property: 'балкон', 					value: 3.34	},[m
+[31m-		][m
+[31m-	},[m
+[31m-	{[m
+[31m-		section: 1,		id: '1B',[m
+[31m-		'roomCount': 1,[m
+[31m-		'label': '1Б',[m
+[31m-		'2d': 'src/app/img/apartments/C1_2D_1B-2.png',[m
+[31m-		'3d': 'src/app/img/apartments/C1_3D_1B-2.png',[m
+[31m-		aboutApartment : [[m
+[31m-				{		property: 'Загальна площа',	 	value: 41.05	},[m
+[31m-				{		property: 'Жила площа', 			value: 16.28	},[m
+[31m-[m
+[31m-				{		property: 'спальня', 				value: 16.28	},[m
+[31m-				{		property: 'кухня', 					value: 8.83	},[m
+[31m-				{		property: 'санвузол', 				value: 4.10	},[m
+[31m-				{		property: 'вітальня', 				value: 7.56	},[m
+[31m-				{		property: 'балкон', 					value: 4.28	},[m
+[31m-		][m
+[31m-	}[m
+[31m-][m
+[31m-[m
+[31m-export interface ApatrmentInterface {[m
+[31m-	section: number;[m
+[31m-	id: string;[m
+[31m-	roomCount: number;[m
+[31m-	label: string;[m
+[31m-	'2d': string;[m
+[31m-	'3d': string;[m
+[31m-	aboutApartment: AboutApartmentInterface[];[m
+[31m-}[m
+[31m-[m
+[31m-export interface AboutApartmentInterface {[m
+[31m-	property: string;[m
+[31m-	value: number;[m
+[31m-}[m
+[1mdiff --git a/src/app/data/sections/sections.json b/src/app/data/sections/sections.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5c27017[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/data/sections/sections.json[m
+[36m@@ -0,0 +1,26 @@[m
+[32m+[m[32m[[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "houseId": "house1",[m
+[32m+[m[32m    "labelText": "C1",[m
+[32m+[m[32m    "labelX": "140",[m
+[32m+[m[32m    "labelY": "190",[m
+[32m+[m[32m    "points": "313.234 11.5543 313.234 193.816 289.787 193.816 286.871 190.899 280.556 197.212 274.936 197.212 268.481 190.761 248.587 210.649 240.702 202.767 200.859 242.6 208.565 250.304 188.997 269.867 195.524 276.392 195.524 283.363 189.788 289.098 191.751 291.062 191.751 315.315 175.041 315.315 175.041 318.91 149.389 318.91 149.389 328.361 144.888 332.858 135.423 332.858 135.423 338.28 106.623 338.28 106.623 341.861 63.8624 341.861 63.8624 319.356 8.94965 319.356 8.94965 275.259 0 275.259 0 238.796 3.11047 238.796 3.11047 230.247 7.62235 225.736 17.0638 225.736 17.0638 211.358 55.7709 172.66 49.6508 166.541 49.6508 159.859 55.8256 153.686 51.0937 148.958 67.9125 132.142 64.3206 128.551 126.432 66.4553 129.816 69.838 146.703 52.9565 151.425 57.6791 157.724 51.3808 164.696 51.3808 170.891 57.5755 209.495 18.983 226.812 18.983 226.812 9.7545 231.091 5.474 240.315 5.474 240.315 2.4475 274.972 2.4475 274.972 11.6193",[m
+[32m+[m[32m    "sectionId": "section1"[m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "houseId": "house1",[m
+[32m+[m[32m    "labelText": "C2",[m
+[32m+[m[32m    "labelX": "400",[m
+[32m+[m[32m    "labelY": "130",[m
+[32m+[m[32m    "points": "307.409 17.1694 310.055 17.164 310.055 0.40368 344.465 0.40368 344.465 3.95957 352.848 3.95957 357.473 8.58282 357.473 17.6297 389.027 17.6297 389.027 31.7253 443.729 31.7253 443.729 17.164 475.064 17.164 475.064 8.34258 479.492 3.91688 488.299 3.91688 488.299 0.40366 522.7 0.40366 522.7 17.1694 525.344 17.1694 525.344 195.791 520.472 195.791 520.472 192.674 490.048 192.674 490.048 211.672 459.609 211.672 459.609 220.498 454.977 225.129 445.933 225.129 445.933 226.664 386.817 226.664 386.817 225.341 377.984 225.341 372.696 220.054 372.696 211.667 342.702 211.667 342.702 193.123 312.7 193.123 312.7 195.791 307.409 195.791",[m
+[32m+[m[32m    "sectionId": "section2"[m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m    "houseId": "house1",[m
+[32m+[m[32m    "labelText": "C3",[m
+[32m+[m[32m    "labelX": "650",[m
+[32m+[m[32m    "labelY": "190",[m
+[32m+[m[32m    "points": "524.926 19.1632 524.926 201.425 548.371 201.425 551.29 198.508 557.604 204.823 563.222 204.823 569.679 198.369 589.573 218.257 597.457 210.375 637.299 250.209 629.594 257.912 649.163 277.476 642.636 284.002 642.636 290.972 648.373 296.708 646.409 298.671 646.409 322.925 663.12 322.925 663.12 326.517 688.771 326.517 688.771 335.97 693.274 340.468 702.735 340.468 702.735 345.889 731.537 345.889 731.537 349.47 774.297 349.47 774.297 326.964 829.208 326.964 829.208 282.867 843.643 282.867 843.643 246.404 835.05 246.404 835.05 237.855 830.537 233.346 821.096 233.346 821.096 218.967 782.389 180.27 788.508 174.151 788.508 167.47 782.334 161.294 787.066 156.566 770.246 139.751 773.84 136.159 711.728 74.0642 708.345 77.4467 691.459 60.5652 686.735 65.2879 680.434 58.9897 673.464 58.9897 667.267 65.1844 628.665 26.5919 611.347 26.5 611.347 17.363 607.067 13.082 597.844 13.0829 597.844 5.1613 563.189 5.1613 563.189 19.228",[m
+[32m+[m[32m    "sectionId": "section3"[m
+[32m+[m[32m  }[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/directives/higlight.directive.ts b/src/app/directives/higlight.directive.ts[m
+[1mindex 23d7775..63fff7f 100644[m
+[1m--- a/src/app/directives/higlight.directive.ts[m
+[1m+++ b/src/app/directives/higlight.directive.ts[m
+[36m@@ -1,8 +1,8 @@[m
+ import { Directive, ElementRef, Input } from '@angular/core';[m
+ [m
+ @Directive({[m
+[31m-	selector: '[myHighlight]',[m
+[31m-	host: {[m
+[32m+[m[32m  selector: '[myHighlight]',[m
+[32m+[m[32m  host: {[m
+     '(mouseenter)': 'onMouseEnter()',[m
+     '(mouseleave)': 'onMouseLeave()'[m
+   }[m
+[1mdiff --git a/src/app/directives/polygonDirective.ts b/src/app/directives/polygonDirective.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f979792[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/directives/polygonDirective.ts[m
+[36m@@ -0,0 +1,22 @@[m
+[32m+[m[32mimport { Directive, ElementRef, Input, AfterViewInit } from '@angular/core';[m
+[32m+[m
+[32m+[m[32m@Directive({[m
+[32m+[m[32m  selector: '[polygonDirective]',[m
+[32m+[m[32m  host: { }[m
+[32m+[m[32m})[m
+[32m+[m[32mexport class PolygonDirective implements AfterViewInit {[m
+[32m+[m[32m  private el:HTMLElement;[m
+[32m+[m[32m  private browserDomAdapter: any;[m
+[32m+[m
+[32m+[m[32m  @Input('polygonDirective') points: string;[m
+[32m+[m
+[32m+[m[32m  constructor( el: ElementRef ) {[m
+[32m+[m[32m    this.el = el.nativeElement;[m
+[32m+[m[32m  }[m
+[32m+[m[32m  ngAfterViewInit() {[m
+[32m+[m[32m    this.polygonMaker();[m
+[32m+[m[32m  }[m
+[32m+[m[32m  private polygonMaker() {[m
+[32m+[m[32m    this.el.innerHTML = `<polygon points="${this.points}"></polygon>`;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/floor/floor.component.css b/src/app/floor/floor.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex 68f9458..0000000[m
+[1m--- a/src/app/floor/floor.component.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,64 +0,0 @@[m
+[31m-[m
+[31m-div.general_planning {[m
+[31m-	display: block;[m
+[31m-	margin: 0 auto;[m
+[31m-	background: url('../img/step-three-c1.png');[m
+[31m-	background-size: 100% 100%;[m
+[31m-	background-repeat: no-repeat;[m
+[31m-	width: 620px;[m
+[31m-	height: 320px;[m
+[31m-	z-index: 1;[m
+[31m-}[m
+[31m-svg {[m
+[31m-	display: inline-block;[m
+[31m-	width: 620px;[m
+[31m-	height: 320px;[m
+[31m-}[m
+[31m-svg polygon {[m
+[31m-	z-index: 2;[m
+[31m-}[m
+[31m-g {[m
+[31m-	display: inline-block;[m
+[31m-	margin: 0;[m
+[31m-	padding: 0;[m
+[31m-}[m
+[31m-g.apart {[m
+[31m-	stroke:	#5A5B5F;[m
+[31m-	cursor: pointer;[m
+[31m-	opacity: 0.1;[m
+[31m-	-webkit-transition: .5s;[m
+[31m-	transition: .5s;[m
+[31m-}[m
+[31m-g.apart:hover {[m
+[31m-	fill: rgb(200, 200, 200);[m
+[31m-	z-index: 9999;[m
+[31m-	opacity: .7;[m
+[31m-}[m
+[31m-[m
+[31m-#floor_selection {[m
+[31m-	fill: '#eee';[m
+[31m-	opacity: .4;[m
+[31m-}[m
+[31m-#floor_selection:hover {[m
+[31m-	opacity: 1;[m
+[31m-}[m
+[31m-[m
+[31m-#floor_selection path:hover {[m
+[31m-	fill: '#999'[m
+[31m-}[m
+[31m-[m
+[31m-svg	path {[m
+[31m-		z-index: 2;[m
+[31m-	}[m
+[31m-svg	g {[m
+[31m-		z-index: 1;[m
+[31m-	}[m
+[31m-svg	path, text {[m
+[31m-		cursor: pointer;[m
+[31m-	}[m
+[31m-svg	path:hover, svg text:hover {[m
+[31m-		fill: #eee;[m
+[31m-	}[m
+[31m-svg text:hover svg path{[m
+[31m-		fill: #eee;[m
+[31m-	}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/floor/floor.component.html b/src/app/floor/floor.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex 6a8ac14..0000000[m
+[1m--- a/src/app/floor/floor.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,81 +0,0 @@[m
+[31m-<main role='main'>[m
+[31m-	<div class='general_planning'>[m
+[31m-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: inline-block;">[m
+[31m-		   <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">[m
+[31m-		      <g id="D-/-step-4.1-/-1920-" transform="translate(-612.000000, -1138.000000)">[m
+[31m-		          <g id="section-1" transform="translate(613.000000, 1139.000000)">[m
+[31m-		              <g id="1B" class="apart" data-room="1" data-square="41,05"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '1B']">[m
+[31m-		                  <polygon id="p1" stroke="#5A5B5F" fill="#CBAC42" points="75.0662 255.295 78.1063 252.255 108.071 281.785 113.284 276.577 121.098 284.394 131.088 284.394 144.551 270.059 138.038 263.546 162.358 239.658 132.827 211.431 148.027 196.233 45.1005 93.7412 1.67195 137.171 54.6549 190.585 32.9406 212.302"></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="80" y="230">1Б</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		              <g id="2V" class="apart" data-room="2" data-square="73,06"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '2V']">[m
+[31m-		                  <polygon id="2" stroke="#5A5B5F" fill="#CBAC42" transform="translate(547.250000, 234.000000) scale(-1, 1) translate(-547.250000, -234.000000) " points="663.338 318.175 689.487 292.469 689.487 288.923 701.454 288.923 708.544 282.277 708.544 268.093 745.772 268.093 745.772 171.477 667.327 171.477 649.598 188.762 624.782 163.943 605.723 182.556 516.641 93.918 477.642 132.035"></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="432" y="258">2В</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		              <g id="2A" class="apart" data-room="2" data-square="51,68"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '1A']">[m
+[31m-		                  <polygon id="3" stroke="#5A5B5F" fill="#CBAC42" points="128.558 176.382 159.709 145.669 201.831 145.669 201.831 45.1922 191.738 45.1922 191.738 36.856 114.517 36.856 100.475 50.4575 91.2621 41.2434 82.0482 41.2434 73.7117 49.58 65.3752 41.6824 29.8358 77.6606"></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="135" y="120">2А</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		              <g id="2B" class="apart" data-room="2" data-square="54,04"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '2B']">[m
+[31m-		                 <polygon points="645.625 180.133 681.317 145.731 681.317 145.731 718.299 145.819 718.299 145.731 719.015 111.846 718.299 47.2535 718.299 47.2535 708.409 47.2535 708.409 38.6531 634.016 38.6531 616.385 55.424 607.782 46.8234 598.753 46.8234 590.582 54.994 582.411 46.8234 547.579 82.5159 645.625 174.972" id="4" stroke="#5A5B5F" fill="#CBAC42" transform="translate(568.565300, 123.750000) scale(-1, 1) translate(-568.565300, -123.750000) "></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="540" y="120">2Б</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		              <g id="1V" class="apart" data-room="1" data-square="44,68"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '1V']">[m
+[31m-		                  <polygon id="5" stroke="#5A5B5F" fill="#CBAC42" points="202.268 44.3149 202.268 145.669 306.522 145.669 306.522 0 245.269 0 245.269 7.45893 211.482 7.45893 211.482 17.1117 199.196 17.1117 192.176 24.1319 192.176 44.3149"></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="280" y="90">1В</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		              <g id="1G" class="apart" data-room="1" data-square="44,68"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '1G']">[m
+[31m-		                  <polygon id="6" stroke="#5A5B5F" fill="#CBAC42" transform="translate(415.151855, 83.000000) scale(-1, 1) translate(-415.151855, -83.000000) " points="416.934 41.7313 416.934 146.187 524.378 146.187 524.378 -3.94 461.249 -3.94 461.249 3.7472 426.43 3.7472 426.43 13.6955 413.769 13.6955 406.535 20.9306 406.535 41.7313"></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="400" y="90">1Г</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		              <g id="1A" class="apart" data-room="1" data-square="38,99"[m
+[31m-		              (mouseenter)="showData($event)"[m
+[31m-		              (mouseleave)="hideData($event)"[m
+[31m-		              [routerLink]="['/house', house.id, 'section', section.id,'floor', floor.id, 'apartment', '1A']">[m
+[31m-		                  <polygon id="7" stroke="#5A5B5F" fill="#CBAC42" points="147.766 197.01 173.284 171.045 267.297 170.599 267.297 268.192 229.233 268.192 229.233 282.513 222.461 289.283 209.986 289.283 209.986 292.811 185.136 317.664 168.35 300.877 164.779 304.453 138.814 278.487 144.633 272.667 137.918 265.952 162.542 241.778 132.546 212.232"></polygon>[m
+[31m-		                  <text>[m
+[31m-		                      <tspan x="220" y="258">1А</tspan>[m
+[31m-		                  </text>[m
+[31m-		              </g>[m
+[31m-		          </g>[m
+[31m-		      </g>[m
+[31m-		  </g>[m
+[31m-		</svg>[m
+[31m-	</div>[m
+[31m-	<div *ngIf="about_apartment">[m
+[31m-	<h2 style='text-align: center;'>[m
+[31m-		Кількість кімнат: {{about_apartment.room}} | Загальна площа: {{about_apartment.square}} м.кв.[m
+[31m-	</h2>[m
+[31m-[m
+[31m-	</div>[m
+[31m-</main>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/floor/floor.component.ts b/src/app/floor/floor.component.ts[m
+[1mdeleted file mode 100644[m
+[1mindex 4f2064a..0000000[m
+[1m--- a/src/app/floor/floor.component.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,64 +0,0 @@[m
+[31m-import { Component, OnInit, OnDestroy } from '@angular/core';[m
+[31m-import { ActivatedRoute, Router } from '@angular/router';[m
+[31m-import {AfterViewInit, Directive, Input, QueryList, ViewChildren, ViewChild} from '@angular/core';[m
+[31m-[m
+[31m-import { ApartmentsStorage, ApatrmentInterface } from '../data/apartments.storage';[m
+[31m-[m
+[31m-export interface roomSquareInterface {[m
+[31m-  room: number;[m
+[31m-  square: number;[m
+[31m-}[m
+[31m-[m
+[31m-@Component({[m
+[31m-	moduleId: module.id,[m
+[31m-  selector: "floor-component",[m
+[31m-  templateUrl: "./floor.component.html",[m
+[31m-  styleUrls: [ "./floor.component.css" ][m
+[31m-})[m
+[31m-export class FloorComponent implements AfterViewInit {[m
+[31m-	// id: number;[m
+[31m-  private sub: any;[m
+[31m-  information: string;[m
+[31m-  about_apartment: roomSquareInterface;[m
+[31m-  apartments: ApatrmentInterface[] = ApartmentsStorage;[m
+[31m-[m
+[31m-  section: {id: number};[m
+[31m-  floor: {id: number};[m
+[31m-  house: {id: number};[m
+[31m-[m
+[31m-  constructor(private route: ActivatedRoute, private router: Router) {}[m
+[31m-  ngOnInit() {[m
+[31m- 			this.sub = this.route.params.subscribe(params => {[m
+[31m-      this.section = {[m
+[31m-        id: params['id1'][m
+[31m-      }[m
+[31m-      this.house = {[m
+[31m-        id: params['id2'][m
+[31m-      }[m
+[31m-      this.floor = {[m
+[31m-        id: params['id3'][m
+[31m-      }[m
+[31m-      // this.id = +params['id']; (+) converts string 'id' to a number;[m
+[31m-      // In a real app: dispatch action;[m
+[31m-    });[m
+[31m-  }[m
+[31m-  ngOnDestroy() {[m
+[31m-    this.sub.unsubscribe();[m
+[31m-  }[m
+[31m-[m
+[31m-  ngAfterViewInit () {[m
+[31m-[m
+[31m-  }[m
+[31m-[m
+[31m- showData( event: any ) {[m
+[31m-    let apart = this.apartments.find( (apartment)=>apartment.id === event.target.id );[m
+[31m-    this.about_apartment = {[m
+[31m-      room: apart.roomCount,[m
+[31m-      square: apart.aboutApartment[0].value,[m
+[31m-    }[m
+[31m-  }[m
+[31m-  hideData( event: any ) {[m
+[31m-    this.about_apartment = null;[m
+[31m-  }[m
+[31m-[m
+[31m-}[m
+[1mdiff --git a/src/app/house/house.component.css b/src/app/house/house.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex ad432b6..0000000[m
+[1m--- a/src/app/house/house.component.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,53 +0,0 @@[m
+[31m-div.general_planning {[m
+[31m-	display: block;[m
+[31m-	margin: 0 auto;[m
+[31m-	background: url('../img/step-two-14.png');[m
+[31m-	background-size: 100% 100%;[m
+[31m-	background-repeat: no-repeat;[m
+[31m-	width: 841px;[m
+[31m-	height: 340px;[m
+[31m-	z-index: 1;[m
+[31m-}[m
+[31m-svg {[m
+[31m-	display: inline-block;[m
+[31m-	width: 841px;[m
+[31m-	height: 340px;[m
+[31m-}[m
+[31m-g.section {[m
+[31m-	stroke:	#5A5B5F;[m
+[31m-	cursor: pointer;[m
+[31m-	fill: rgb(240, 240, 240);[m
+[31m-	opacity: 0.4;[m
+[31m-	-webkit-transition: .5s;[m
+[31m-	transition: .5s;[m
+[31m-}[m
+[31m-g.section:hover {[m
+[31m-	fill: rgb(200, 200, 200);[m
+[31m-	z-index: 9999;[m
+[31m-	opacity: .8;[m
+[31m-}[m
+[31m-g.menu_floor {[m
+[31m-						 opacity: 0;[m
+[31m-					transition: .5s;[m
+[31m-	 webkit-transition: .5s;[m
+[31m-}[m
+[31m-g.section:hover>g.menu_floor {[m
+[31m-	opacity: 1;[m
+[31m-}[m
+[31m-svg g>path {[m
+[31m-						 z-index: 2;[m
+[31m-					transition: .5s;[m
+[31m-	 webkit-transition: .5s;[m
+[31m-}[m
+[31m-g.menu_floor_selection {[m
+[31m-		 cursor: pointer;[m
+[31m-		z-index: 3;[m
+[31m-}[m
+[31m-g.menu_floor_selection:hover {[m
+[31m-	opacity: 1;[m
+[31m-}[m
+[31m-/* Very important */[m
+[31m-g.menu_floor_selection:hover>path {[m
+[31m-		fill: #eee;[m
+[31m-		opacity: 1;[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/house/house.component.html b/src/app/house/house.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex 136eb0a..0000000[m
+[1m--- a/src/app/house/house.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,88 +0,0 @@[m
+[31m-<main role='main'>[m
+[31m-	<div class='general_planning'>[m
+[31m-	<svg>[m
+[31m-	<g id="all-section" transform="translate(11.000000, 27.000000)">[m
+[31m-		<g *ngIf="id == 1">[m
+[31m-			<g  class="section" data-house="14" data-text="секция 3" id="C3"[m
+[31m-			transform="translate(510.000000, -20) scale(0.90, .90)"[m
+[31m-			[routerLink]="['/house', house.id, 'section', section.id]">[m
+[31m-					<polygon  id="Path-86-Copy" points="339.043796 15.1632124 339.043796 208.75426 314.140596 208.75426 311.041797 205.656258 304.334785 212.361546 298.365645 212.361546 291.509524 205.507188 270.378549 226.63273 262.005151 218.261485 219.685308 260.570447 227.869581 268.752616 207.085134 289.531719 214.018579 296.463381 214.018579 303.866601 207.924328 309.959285 210.010314 312.044735 210.010314 337.804718 192.259834 337.804718 192.259834 341.623063 165.014599 341.623063 165.014599 351.660622 160.233577 356.440415 150.182054 356.440415 150.182054 362.197003 119.591473 362.197003 119.591473 366.000002 74.172666 366.000002 74.172666 342.096307 15.8467151 342.096307 15.8467151 295.259067 0.517592992 295.259067 0.517592992 256.530198 9.64458482 256.530198 9.64458482 247.449238 14.4368988 242.658156 24.4650923 242.658156 24.4650923 227.386005 65.5783169 186.28335 59.0776905 179.784395 59.0776905 172.687241 65.6362651 166.130352 60.6103465 161.105726 78.4746983 143.245967 74.6594255 139.431675 140.631382 73.476679 144.225113 77.069486 162.160532 59.1386774 167.178034 64.1548889 173.869343 57.4652997 181.273963 57.4652997 187.855319 64.0449639 228.857199 23.0536252 247.24968 23.0536252 247.24968 13.2512952 251.797147 8.70499814 261.594293 8.70499814 261.594293 0.291023093 298.40515 0.291023093 298.40515 15.2321769" stroke="#5A5B5F" transform="translate(175.780694, 183.145512) scale(-1, 1) translate(-175.780694, -183.145512) "></polygon>[m
+[31m-					<text  id="Ct3">[m
+[31m-							<tspan  x="140" y="190">C3</tspan>[m
+[31m-					</text>[m
+[31m-			</g>[m
+[31m-			<g  class="section" data-house="14" data-text="секция 2" id="C2" transform="translate(304, -25) scale(0.90, .90)">[m
+[31m-					<polygon  id="Path-87" points="0.408759124 18.1694194 3.27737226 18.1632124 3.27737226 -8.38354146e-13 40.5693431 -8.38354146e-13 40.5693431 3.85359211 49.6533334 3.85359211 54.6649355 8.86390572 54.6649355 18.6680635 88.861393 18.6680635 88.861393 33.943892 148.142336 33.943892 148.142336 18.1632124 182.101056 18.1632124 182.101056 8.60361746 186.898554 3.80735277 196.44348 3.80735277 196.44348 -2.15811561e-05 233.725693 -2.15811561e-05 233.725693 18.1694202 236.591241 18.1694194 236.591248 211.744819 231.31043 211.744819 231.31043 208.367993 198.339135 208.367993 198.339135 228.95753 165.350629 228.95753 165.350629 238.523438 160.332241 243.540535 150.52968 243.540535 150.52968 245.203371 86.4653693 245.203371 86.4653693 243.769429 76.8931622 243.769429 71.161907 238.039647 71.161907 228.952071 38.6569343 228.952071 38.6569343 208.854195 6.14279675 208.854195 6.14279692 211.744812 0.408759124 211.744812" stroke="#5A5B5F"></polygon>[m
+[31m-					<g id="Group-5" opacity="0.6" stroke="#FFFFFF" transform="translate(38.656934, 34.414508)">[m
+[31m-							<polyline  id="Path-90" points="50.2007295 -5.68434189e-14 50.2007299 76.0046792 23.4228449 76.0046792 23.4228449 94.6646135 135.805926 94.6646135 135.805926 75.9932066 109.485405 75.9932055 109.485405 -5.68434189e-14"></polyline>[m
+[31m-							<path  d="M79.8430657,94.6398964 L79.8430657,210.310881" id="Path-91"></path>[m
+[31m-							<polyline  id="Path-92" points="23.4270073 94.6398964 0 94.6398964 0 173.984456"></polyline>[m
+[31m-							<polyline  id="Path-92-Copy" points="159.686131 94.6398964 135.781022 94.6398964 135.781022 173.506477" transform="translate(147.733577, 134.073187) scale(-1, 1) translate(-147.733577, -134.073187) "></polyline>[m
+[31m-					</g>[m
+[31m-					<text  id="Ct2">[m
+[31m-							<tspan  x="100" y="130">C2</tspan>[m
+[31m-					</text>[m
+[31m-			</g>[m
+[31m-			<g  class="section" data-house="14" data-text="секция 1" id="C1"[m
+[31m-				transform="translate(-5, -20) scale(0.90, .90)" >[m
+[31m-					<polygon  id="Path-86" points="339.452555 15.1632124 339.452555 208.75426 314.549355 208.75426 311.450556 205.656258 304.743544 212.361546 298.774404 212.361546 291.918283 205.507188 270.787308 226.63273 262.41391 218.261485 220.094068 260.570447 228.27834 268.752616 207.493893 289.531719 214.427338 296.463381 214.427338 303.866601 208.333087 309.959285 210.419074 312.044735 210.419074 337.804718 192.668594 337.804718 192.668594 341.623063 165.423358 341.623063 165.423358 351.660622 160.642336 356.440415 150.590813 356.440415 150.590813 362.197003 120.000232 362.197003 120.000232 366.000002 74.5814251 366.000002 74.5814251 342.096307 16.2554743 342.096307 16.2554743 295.259067 0.926352117 295.259067 0.926352117 256.530198 10.0533439 256.530198 10.0533439 247.449238 14.8456579 242.658156 24.8738514 242.658156 24.8738514 227.386005 65.987076 186.28335 59.4864496 179.784395 59.4864496 172.687241 66.0450242 166.130352 61.0191056 161.105726 78.8834574 143.245967 75.0681846 139.431675 141.040141 73.476679 144.633872 77.069486 162.569292 59.1386774 167.586793 64.1548889 174.278102 57.4652997 181.682722 57.4652997 188.264078 64.0449639 229.265958 23.0536252 247.658439 23.0536252 247.658439 13.2512952 252.205906 8.70499814 262.003053 8.70499814 262.003053 0.291023093 298.813909 0.291023093 298.813909 15.2321769" stroke="#5A5B5F"></polygon>[m
+[31m-					<g  id="lines" opacity="0.595207556" stroke="#FFFFFF" transform="translate(16.255474, 15.163212)">[m
+[31m-							<polyline  id="Path-2" points="282.558394 0 282.558394 91.2940415 266.781022 91.2940415 266.781022 120.928756 246.217069 120.928756 204.627737 162.034974 245.744525 202.663212"></polyline>[m
+[31m-							<polyline  id="Path-3" points="203.671533 245.203368 161.077484 202.62027 111.822823 251.862268 111.822823 280.095856 91.3175182 280.095856 91.3175182 266.712436"></polyline>[m
+[31m-							<path  d="M7.10542736e-15,280.095855 L92.2749612,280.095855" id="Path-7"></path>[m
+[31m-							<polyline  id="Path-45" points="111.875912 280.095855 111.875912 326.459845 149.167883 326.459845"></polyline>[m
+[31m-							<polyline  id="Path-88" points="91.7956204 91.7720207 168.534373 168.491045 245.744526 91.2940415 266.781022 91.2940415"></polyline>[m
+[31m-							<polyline  id="Path-89" points="171.638686 49.2318653 163.510949 57.357513 221.839416 115.193005"></polyline>[m
+[31m-							<polyline  id="Path-88-Copy" points="91.7956204 92.2736889 168.534373 168.992713 245.744526 91.2940415 266.781022 91.2940415"></polyline>[m
+[31m-							<g  id="Group-3" transform="translate(109.364475, 179.589807) scale(-1, 1) rotate(-270.000000) translate(-109.364475, -179.589807) translate(21.864475, 119.589807)">[m
+[31m-									<polyline  id="Path-89-Copy" points="78.5464936 0.851400583 71.853063 7.54311043 130.18153 65.8565819"></polyline>[m
+[31m-									<polyline  id="Path-88-Copy-2" points="-1.42108547e-14 42.5638444 76.7387526 119.282868 153.897196 42.0621762 174.933693 42.0621762"></polyline>[m
+[31m-							</g>[m
+[31m-					</g>[m
+[31m-					<text  id="Ct1">[m
+[31m-							<tspan  x="160" y="190">C1</tspan>[m
+[31m-					</text>[m
+[31m-[m
+[31m-							<g class='menu_floor'>[m
+[31m-<g><path d="M170,170[m
+[31m-						L 124.04,124.04[m
+[31m-						Q	145.13,109.95[m
+[31m-							170,105 Z" fill="white" stroke="grey"></path><text x="154.09" y="131.59" font-size="10">1</text></g>[m
+[31m-<g class='menu_floor_selection'><path d="M170,170[m
+[31m-						L 170,105[m
+[31m-						Q	194.87,109.95[m
+[31m-							215.96,124.04 Z" fill="white" stroke="grey"></path><text x="185.91" y="131.59" font-size="10">2</text></g>[m
+[31m-<g class='menu_floor_selection' [routerLink]="['/house', house.id, 'section', section.id, 'floor',3]" ><path d="M170,170[m
+[31m-						L 215.96,124.04[m
+[31m-						Q	230.05,145.13[m
+[31m-							235,170 Z" fill="white" stroke="grey"></path><text x="208.41" y="154.09" font-size="10">3</text></g>[m
+[31m-<g class='menu_floor_selection'><path d="M170,170[m
+[31m-						L 235,170[m
+[31m-						Q	230.05,194.87[m
+[31m-							215.96,215.96 Z" fill="white" stroke="grey"></path><text x="208.41" y="185.91" font-size="10">4</text></g>[m
+[31m-<g class='menu_floor_selection'><path d="M170,170[m
+[31m-						L 215.96,215.96[m
+[31m-						Q	194.87,230.05[m
+[31m-							170,235 Z" fill="white" stroke="grey"></path><text x="185.91" y="208.41" font-size="10">5</text></g>[m
+[31m-<g class='menu_floor_selection'><path d="M170,170[m
+[31m-						L 170,235[m
+[31m-						Q	145.13,230.05[m
+[31m-							124.04,215.96 Z" fill="white" stroke="grey"></path><text x="154.09" y="208.41" font-size="10">6</text></g>[m
+[31m-<g class='menu_floor_selection'><path d="M170,170[m
+[31m-						L 124.04,215.96[m
+[31m-						Q	109.95,194.87[m
+[31m-							105,170 Z" fill="white" stroke="grey"></path><text x="131.59" y="185.91" font-size="10">7</text></g>[m
+[31m-<g><path d="M170,170[m
+[31m-						L 105,170[m
+[31m-						Q	109.95,145.13[m
+[31m-							124.04,124.04 Z" fill="white" stroke="grey"></path><text x="131.59" y="154.09" font-size="10">8</text></g>[m
+[31m-<circle cx="170" cy="170" r="25" fill="white" stroke="grey"></circle>[m
+[31m-							</g>[m
+[31m-[m
+[31m-					</g>[m
+[31m-			</g>[m
+[31m-			</g>[m
+[31m-	</svg>[m
+[31m-	</div>[m
+[31m-[m
+[31m-</main>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/house/house.component.ts b/src/app/house/house.component.ts[m
+[1mdeleted file mode 100644[m
+[1mindex eedc0d5..0000000[m
+[1m--- a/src/app/house/house.component.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,36 +0,0 @@[m
+[31m-import { Component, OnInit, OnDestroy } from '@angular/core';[m
+[31m-import { ActivatedRoute, Router }       from '@angular/router';[m
+[31m-[m
+[31m-@Component({[m
+[31m-  moduleId: module.id,[m
+[31m-  selector: 'house-component',[m
+[31m-  templateUrl: './house.component.html',[m
+[31m-  styleUrls: ['./house.component.css'][m
+[31m-})[m
+[31m-export class HouseComponent implements OnInit, OnDestroy {[m
+[31m-  id: number;[m
+[31m-  private sub: any;[m
+[31m-  section = {[m
+[31m-    id: 1[m
+[31m-  }[m
+[31m-  house = {[m
+[31m-    id: 1[m
+[31m-  }[m
+[31m-[m
+[31m-  constructor(private route: ActivatedRoute, private router: Router) {}[m
+[31m-[m
+[31m-  ngOnInit() {[m
+[31m-    this.sub = this.route.params.subscribe(params => {[m
+[31m-[m
+[31m-       this.id = +params['id']; // (+) converts string 'id' to a number[m
+[31m-[m
+[31m-       // In a real app: dispatch action to load the details here.[m
+[31m-    });[m
+[31m-    if( Number.isNaN( +this.id ) || this.id > 1 || this.id < 1)[m
+[31m-        this.router.navigate(['/not-found']);[m
+[31m-  }[m
+[31m-[m
+[31m-  ngOnDestroy() {[m
+[31m-    this.sub.unsubscribe();[m
+[31m-  }[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/interfaces/apartment.interface.ts b/src/app/interfaces/apartment.interface.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d8b02a9[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/interfaces/apartment.interface.ts[m
+[36m@@ -0,0 +1,8 @@[m
+[32m+[m[32mexport class apartmentInterface {[m
+[32m+[m[32m    section: string;[m
+[32m+[m[32m    id: string;[m
+[32m+[m[32m    roomCount: string;[m
+[32m+[m[32m    label: string;[m
+[32m+[m[32m    "2d": string;[m
+[32m+[m[32m    "3d": string;[m
+[32m+[m[32m};[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/main/main.component.css b/src/app/main/main.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex 12c06af..0000000[m
+[1m--- a/src/app/main/main.component.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,90 +0,0 @@[m
+[31m-div#background_day, div#background_night, div#content {[m
+[31m-	display: block;[m
+[31m-	position: absolute;[m
+[31m-	height: 98%;[m
+[31m-	width: 99%;[m
+[31m-}[m
+[31m-div#background_day {[m
+[31m-	background: url('../img/bg_day.png');[m
+[31m-	background-size: cover;[m
+[31m-	background-repeat: no-repeat;[m
+[31m-	min-width: 400px;[m
+[31m-	min-height: 400px;[m
+[31m-	z-index: 1;[m
+[31m-}[m
+[31m-div#background_night {[m
+[31m-	background: url('../img/bg_night.png');[m
+[31m-	background-size: cover;[m
+[31m-	background-repeat: no-repeat;[m
+[31m-	min-width: 400px;[m
+[31m-	min-height: 400px;[m
+[31m-	z-index: 0;[m
+[31m-}[m
+[31m-div#background_day, div#background_night {[m
+[31m-  background-repeat: no-repeat;[m
+[31m-}[m
+[31m-#content {[m
+[31m-	z-index: 3;[m
+[31m-}[m
+[31m-#day_or_night {[m
+[31m-	position: absolute;[m
+[31m-	width: 100px;[m
+[31m-	height: 50px;[m
+[31m-	margin-bottom: 5px;[m
+[31m-	background: black;[m
+[31m-	color: white;[m
+[31m-	top: 60%;[m
+[31m-	left: 45%;[m
+[31m-	font-weight: bold;[m
+[31m-	letter-spacing: 3px;[m
+[31m-	opacity: 0.5;[m
+[31m-	transition: 1s;[m
+[31m-	cursor: pointer;[m
+[31m-}[m
+[31m-#day_or_night:hover {[m
+[31m-	opacity: 1;[m
+[31m-}[m
+[31m-[m
+[31m-#go_to_planning {[m
+[31m-	position: absolute;[m
+[31m-	width: 30%;[m
+[31m-	height: 50px;[m
+[31m-	min-width: 145px;[m
+[31m-	top: 80%;[m
+[31m-	left: 35%;[m
+[31m-	background: rgba(255,175,75,1);[m
+[31m-	background: -moz-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 21%, rgba(255,146,10,1) 85%, rgba(255,146,10,1) 100%);[m
+[31m-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,175,75,1)), color-stop(21%, rgba(255,175,75,1)), color-stop(85%, rgba(255,146,10,1)), color-stop(100%, rgba(255,146,10,1)));[m
+[31m-	background: -webkit-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 21%, rgba(255,146,10,1) 85%, rgba(255,146,10,1) 100%);[m
+[31m-	background: -o-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 21%, rgba(255,146,10,1) 85%, rgba(255,146,10,1) 100%);[m
+[31m-	background: -ms-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 21%, rgba(255,146,10,1) 85%, rgba(255,146,10,1) 100%);[m
+[31m-	background: radial-gradient(ellipse at center, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 21%, rgba(255,146,10,1) 85%, rgba(255,146,10,1) 100%);[m
+[31m-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );[m
+[31m-	border: none;[m
+[31m-	border-radius: 10px;[m
+[31m-	cursor: pointer;[m
+[31m-	transition: 1s;[m
+[31m-	font: 30px Monotype Corsiva,serif;[m
+[31m-}[m
+[31m-#go_to_planning:hover {[m
+[31m-	background: rgba(255,175,75,1);[m
+[31m-	background: -moz-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 43%, rgba(255,146,10,1) 90%, rgba(255,146,10,1) 100%);[m
+[31m-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,175,75,1)), color-stop(43%, rgba(255,175,75,1)), color-stop(90%, rgba(255,146,10,1)), color-stop(100%, rgba(255,146,10,1)));[m
+[31m-	background: -webkit-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 43%, rgba(255,146,10,1) 90%, rgba(255,146,10,1) 100%);[m
+[31m-	background: -o-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 43%, rgba(255,146,10,1) 90%, rgba(255,146,10,1) 100%);[m
+[31m-	background: -ms-radial-gradient(center, ellipse cover, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 43%, rgba(255,146,10,1) 90%, rgba(255,146,10,1) 100%);[m
+[31m-	background: radial-gradient(ellipse at center, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 43%, rgba(255,146,10,1) 90%, rgba(255,146,10,1) 100%);[m
+[31m-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );[m
+[31m-}[m
+[31m-[m
+[31m-@media screen and (max-height: 400px) {[m
+[31m-  #go_to_planning, #day_or_night {[m
+[31m-  	margin-left: 70px;[m
+[31m-  	height: 30px;[m
+[31m-  	font-size: 18px;[m
+[31m-  }[m
+[31m-  #day_or_night {[m
+[31m-  	margin-left: 55px;[m
+[31m-  	font-size: 14px;[m
+[31m-  }[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/main/main.component.html b/src/app/main/main.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex b658858..0000000[m
+[1m--- a/src/app/main/main.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,18 +0,0 @@[m
+[31m-<main id="fullpage" class="main__pages" role='main'>[m
+[31m-   <div id="background_day" #backgroundday[m
+[31m-         [@dayOrNightTrigger]="dayOrNight"[m
+[31m-         (window:resize)="onResize($event, backgroundday, backgroundnight)">[m
+[31m-         </div>[m
+[31m-   <div id="background_night" #backgroundnight></div>[m
+[31m-   <div id="content">[m
+[31m-   <side-bar-component></side-bar-component>[m
+[31m-      <div id="day_night">[m
+[31m-         <div>[m
+[31m-            <button  id='day_or_night' #instancedayornight[m
+[31m-                     (click)="aplyDayOrNight( instancedayornight )"> {{dayOrNightValues[dayOrNight].toUpperCase()}} </button>[m
+[31m-            <button id='go_to_planning' routerLink="/planning">Планування</button>[m
+[31m-         </div>[m
+[31m-      </div>[m
+[31m-   </div>[m
+[31m-</main>[m
+[31m-<router-outlet></router-outlet>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/main/main.component.ts b/src/app/main/main.component.ts[m
+[1mdeleted file mode 100644[m
+[1mindex e5e0f3e..0000000[m
+[1m--- a/src/app/main/main.component.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,68 +0,0 @@[m
+[31m-import {[m
+[31m-  Component,[m
+[31m-  Input,[m
+[31m-} from '@angular/core';[m
+[31m-import {[m
+[31m-  trigger,[m
+[31m-  state,[m
+[31m-  style,[m
+[31m-  animate,[m
+[31m-  transition,[m
+[31m-} from '@angular/animations';[m
+[31m-[m
+[31m-[m
+[31m-import { SideBarComponent } from '../sideBar/sideBar.component';[m
+[31m-import { WindowRef }        from '../models/window-ref';[m
+[31m-[m
+[31m-@Component({[m
+[31m-	moduleId: module.id,[m
+[31m-  selector: "main-component",[m
+[31m-  templateUrl: "./main.component.html",[m
+[31m-  styleUrls: [ "./main.component.css" ],[m
+[31m-  animations: [[m
+[31m-    trigger('dayOrNightTrigger', [[m
+[31m-      state('inactive', style({[m
+[31m-        opacity: 1,[m
+[31m-      })),[m
+[31m-      state('active',   style({[m
+[31m-       opacity: 0,[m
+[31m-      })),[m
+[31m-      transition('active => inactive', animate('1s ease-in')),[m
+[31m-      transition('inactive => active', animate('1s ease-out'))[m
+[31m-    ])[m
+[31m-  ][m
+[31m-})[m
+[31m-export class MainComponent {[m
+[31m-[m
+[31m-  constructor( private windowRef: WindowRef ) {}[m
+[31m-[m
+[31m-	dayOrNight: string = 'inactive';[m
+[31m-	width: number =  this.windowRef.nativeWindow.innerWidth;[m
+[31m-	height: number = this.windowRef.nativeWindow.innerHeight;[m
+[31m-  dayOrNightValues: dayOrNightValuesInterface = {[m
+[31m-    active: 'день',[m
+[31m-    inactive: 'ніч'[m
+[31m-  };[m
+[31m-[m
+[31m-  aplyDayOrNight( elem: HTMLElement ) {[m
+[31m-    elem.style.color = this.dayOrNight === 'inactive' ? 'black' : 'white';[m
+[31m-    elem.style.background = this.dayOrNight === 'active' ? 'black' : 'white';[m
+[31m-    this.dayOrNight = this.dayOrNight === 'active' ? 'inactive' : 'active';[m
+[31m-  };[m
+[31m-[m
+[31m-  onResize( event: any, background_day: HTMLElement, background_night: HTMLElement ) {[m
+[31m-  	let width = event.target.innerWidth > 400 ? event.target.innerWidth : 400;[m
+[31m-  	let height = event.target.innerHeight > 400 ? event.target.innerHeight : 400;[m
+[31m-    let backgroundSize = `${width}px ${height}px`;[m
+[31m-    background_day.style.backgroundSize = backgroundSize;[m
+[31m-		background_night.style.backgroundSize = backgroundSize;[m
+[31m-	}[m
+[31m-[m
+[31m-}[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-export interface dayOrNightValuesInterface {[m
+[31m-	active: string,[m
+[31m-	inactive: string,[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/not-found/not-found.component.css b/src/app/not-found/not-found.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/app/not-found/not-found.component.html b/src/app/not-found/not-found.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex a0d0793..0000000[m
+[1m--- a/src/app/not-found/not-found.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,3 +0,0 @@[m
+[31m-<h1 style='text-align: center;'>[m
+[31m-	The Page you are trying to assign is not available.[m
+[31m-</h1>[m
+[1mdiff --git a/src/app/planning/planning.component.css b/src/app/planning/planning.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex 96dec88..0000000[m
+[1m--- a/src/app/planning/planning.component.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,33 +0,0 @@[m
+[31m-main {[m
+[31m-	text-align: center;[m
+[31m-}[m
+[31m-div.general_planning {[m
+[31m-	position: relative;[m
+[31m-	display: inline-block;[m
+[31m-	margin-top: 20px;[m
+[31m-	background: url('../img/complex-plan.png');[m
+[31m-	background-size: 100% 100%;[m
+[31m-	background-repeat: no-repeat;[m
+[31m-	width: 887px;[m
+[31m-	height: 604px;[m
+[31m-	z-index: 1;[m
+[31m-}[m
+[31m-svg {[m
+[31m-	position: relative;[m
+[31m-	width: 100%;[m
+[31m-	height: 100%;[m
+[31m-}[m
+[31m-svg polygon {[m
+[31m-			z-index: 2;[m
+[31m-}[m
+[31m-g {[m
+[31m-	stroke:	#5A5B5F;[m
+[31m-	cursor: pointer;[m
+[31m-	fill: rgb(240, 240, 240);[m
+[31m-	-webkit-transition: .5s;[m
+[31m-	transition: .5s;[m
+[31m-}[m
+[31m-g:hover {[m
+[31m-	fill: rgb(200, 200, 200);[m
+[31m-	z-index: 9999;[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/planning/planning.component.html b/src/app/planning/planning.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex 24f1cc2..0000000[m
+[1m--- a/src/app/planning/planning.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,26 +0,0 @@[m
+[31m-<main role='main'>[m
+[31m-	<div class='general_planning'>[m
+[31m-		<svg xmlns="http://www.w3.org/2000/svg" fill="transparent">[m
+[31m-			<g id="D1" class="house" data-text="Дом №1"[m
+[31m-				transform="translate(217.000000, 131) scale(0.95, 1)"[m
+[31m-				stroke="#5A5B5F"[m
+[31m-				[routerLink]="['/house',houses[0].id]" >[m
+[31m-          <polygon points="91.2094762 1.30338868 91.2094727 49.9745837 80.077901 49.9745837 80.077901 51.6016259 72.0857628 59.5937641 75.1351411 62.6431423 61.4232555 76.3550279 58.1705847 73.1023571 48.6931109 82.579831 48.6931109 93.0296698 26.8012587 93.0296698 26.8012587 99.4308036 16.6072708 99.4308036 16.6072708 92.4643181 0.20630241 92.4643181 0.20630241 79.8856833 2.34669242 79.8856833 2.34669242 61.4994931 22.6113237 41.2348618 17.0533968 35.676935 34.539639 18.1906928 40.0508038 23.7018575 60.0220982 3.73056312 79.4135083 3.73056312 79.4135083 1.30338869"></polygon>[m
+[31m-          <polygon  transform="translate(204.501587, 50.063707) scale(-1, 1) translate(-204.501587, -50.063707) " points="250.003174 1 250.00317 49.6711951 238.871599 49.6711951 238.871599 51.2982372 230.87946 59.2903754 233.928839 62.3397536 220.216953 76.0516392 216.964282 72.7989685 207.486808 82.2764423 207.486808 92.7262811 185.594956 92.7262811 185.594956 99.1274149 175.400968 99.1274149 175.400968 92.1609294 159 92.1609294 159 79.5822946 161.14039 79.5822946 161.14039 61.1961044 181.405021 40.9314731 175.847094 35.3735463 193.333337 17.8873041 198.844501 23.3984689 218.815796 3.42717443 238.207206 3.42717443 238.207206 1"></polygon>[m
+[31m-          <polygon  points="91.3552246 52.1682972 103.362465 52.1682957 103.362465 59.6450394 115.413831 59.6450394 115.413831 61.3605958 134.950345 61.3605958 134.950345 59.289028 147.052788 59.289028 147.052788 51.9172998 159.056152 51.9173016 159.056152 6.4582285 147.286058 6.27057495 147.286058 0.648353364 134.481703 0.648353364 134.481703 6.45822832 115.951972 6.45822832 115.951972 0.454143916 102.691115 0.454143916 102.691115 6.01691852 91.3552246 6.01691857"></polygon>[m
+[31m-          <polygon id="Path-78" points="48.6392822 91.0917969 53.5679943 91.0917969 53.5679942 84.2194829 61.3770753 76.350708 58.0632114 73.0479445 48.5662137 82.5449422"></polygon>[m
+[31m-          <polygon id="Path-79" points="75.1227417 62.6467285 82.9853096 54.7836113 91.2108408 54.7836113 91.2108408 50.0036621 80.1693927 50.0036621 80.1693926 51.4890137 72.0601196 59.5562744"></polygon>[m
+[31m-          <polygon id="Path-80" points="91.3164705 54.7708129 103.362793 54.7043457 103.362793 52.1435093 91.3164705 52.1435093"></polygon>[m
+[31m-          <polygon id="Path-81" points="147.058604 55.2468262 159.151733 55.2468262 159.151733 51.9359741 147.058604 51.9359741"></polygon>[m
+[31m-          <polygon id="Path-82" points="159.218994 49.6139839 159.218994 55.241638 168.186462 55.241638 175.034851 62.2849119 178.134618 59.2748814 170.214834 51.3675537 170.214834 49.6139839"></polygon>[m
+[31m-          <polygon id="Path-83" points="188.810486 76.0560303 196.670747 83.9857178 196.670747 91.2916065 201.520047 91.2916065 201.520046 82.3131104 192.034241 72.8231201"></polygon>[m
+[31m-          <polygon  points="61 76.1565399 69.4024245 84.4585003 92.3804528 61.4804721 88.8999807 58 79.6392822 67.0831757 74.8388672 62.3176723"></polygon>[m
+[31m-          <polygon transform="translate(180.229250, 77.690226) scale(-1, -1) rotate(-90.000000) translate(-180.229250, -77.690226) " points="164.539024 82.6175162 172.941448 90.9194765 195.919477 67.9414483 192.439004 64.4609762 183.178306 73.5441519 178.377891 68.7786485"></polygon>[m
+[31m-          <polygon  transform="translate(130.200150, 68.758744) scale(-1, -1) rotate(-135.000000) translate(-130.200150, -68.758744) " points="114.548657 74.0633382 122.484188 81.9463891 145.851642 58.7197175 142.729608 55.5710984 133.225141 65.0255013 128.362876 60.14157"></polygon>[m
+[31m-				<text id="Dt1" opacity="0.400000006" font-size="24" letter-spacing="2" fill="#738289">[m
+[31m-						<tspan x="110" y="40">Д1</tspan>[m
+[31m-				</text>[m
+[31m-			</g>[m
+[31m-		</svg>[m
+[31m-	</div>[m
+[31m-</main>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/section/section.component.css b/src/app/section/section.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/app/section/section.component.html b/src/app/section/section.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/app/section/section.component.ts b/src/app/section/section.component.ts[m
+[1mdeleted file mode 100644[m
+[1mindex a450a0a..0000000[m
+[1m--- a/src/app/section/section.component.ts[m
+[1m+++ /dev/null[m
+[36m@@ -1,37 +0,0 @@[m
+[31m-import { Component, OnInit, OnDestroy } from '@angular/core';[m
+[31m-import { ActivatedRoute } from '@angular/router';[m
+[31m-import { Router }               from '@angular/router';[m
+[31m-[m
+[31m-@Component({[m
+[31m-  moduleId: module.id,[m
+[31m-  selector: 'section-component',[m
+[31m-  templateUrl: './section.component.html',[m
+[31m-  styleUrls: ['./section.component.css'][m
+[31m-})[m
+[31m-export class HouseComponent implements OnInit, OnDestroy {[m
+[31m-  id: number;[m
+[31m-  private sub: any;[m
+[31m-  section = {[m
+[31m-    id: 1[m
+[31m-  }[m
+[31m-  house = {[m
+[31m-    id: 1[m
+[31m-  }[m
+[31m-[m
+[31m-  constructor(private route: ActivatedRoute, private router: Router) {}[m
+[31m-[m
+[31m-  ngOnInit() {[m
+[31m-    this.sub = this.route.params.subscribe(params => {[m
+[31m-[m
+[31m-       this.id = +params['id']; // (+) converts string 'id' to a number[m
+[31m-[m
+[31m-       // In a real app: dispatch action to load the details here.[m
+[31m-    });[m
+[31m-    if( Number.isNaN( +this.id ) || this.id > 1 || this.id < 1)[m
+[31m-        this.router.navigate(['/prob']);[m
+[31m-  }[m
+[31m-[m
+[31m-  ngOnDestroy() {[m
+[31m-    this.sub.unsubscribe();[m
+[31m-  }[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/services/apartment-about/apartment-about.service.ts b/src/app/services/apartment-about/apartment-about.service.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0fe39ba[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/apartment-about/apartment-about.service.ts[m
+[36m@@ -0,0 +1,34 @@[m
+[32m+[m[32mimport { Http, Response } from '@angular/http';[m
+[32m+[m[32mimport { Injectable } from '@angular/core';[m
+[32m+[m
+[32m+[m[32mimport { apartmentInterface } from '../../interfaces/apartment.interface';[m
+[32m+[m
+[32m+[m[32mimport 'rxjs/add/operator/toPromise';[m
+[32m+[m[32mimport * as _ from 'lodash';[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@Injectable()[m
+[32m+[m[32mexport class ApatrmentAboutService {[m
+[32m+[m[32m    private defValue: string = 'apartments';[m
+[32m+[m
+[32m+[m[32m    constructor (private http: Http) {}[m
+[32m+[m
+[32m+[m[32m    urlMaker(id: any) {[m
+[32m+[m[32m      let idPassed = _.isEqual(id, null)[m
+[32m+[m[32m            ? this.defValue[m
+[32m+[m[32m            : id;[m
+[32m+[m[32m      return `./src/app/data/about-apartment/${ idPassed }.json`;[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m    getApartments(idPassed: any): Promise<any> {[m
+[32m+[m[32m      return this.http.get(this.urlMaker(idPassed))[m
+[32m+[m[32m             .toPromise()[m
+[32m+[m[32m             .then(response => response.json())[m
+[32m+[m[32m             .catch(this.handleError);[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m    private handleError (error: Response | any) {[m
+[32m+[m[32m      return Promise.reject(error.message || error);[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/services/section/section.service.ts b/src/app/services/section/section.service.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..561b98f[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/section/section.service.ts[m
+[36m@@ -0,0 +1,29 @@[m
+[32m+[m[32mimport { Http, Response } from '@angular/http';[m
+[32m+[m[32mimport { Injectable } from '@angular/core';[m
+[32m+[m
+[32m+[m[32mimport 'rxjs/add/operator/toPromise';[m
+[32m+[m[32mimport * as _ from 'underscore';[m
+[32m+[m
+[32m+[m
+[32m+[m[32m@Injectable()[m
+[32m+[m[32mexport class SectionsAboutService {[m
+[32m+[m[32m    constructor ([m
+[32m+[m[32m      private http: Http[m
+[32m+[m[32m    ) {}[m
+[32m+[m
+[32m+[m[32m    urlMaker() {[m
+[32m+[m[32m      return `./src/app/data/sections/sections.json`;[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m    getSections(): Promise<any> {[m
+[32m+[m[32m      return this.http.get(this.urlMaker())[m
+[32m+[m[32m             .toPromise()[m
+[32m+[m[32m             .then(response => response.json())[m
+[32m+[m[32m             .catch(this.handleError);[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m    private handleError (error: Response | any) {[m
+[32m+[m[32m      return Promise.reject(error.message || error);[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/sideBar/sideBar.component.css b/src/app/sideBar/sideBar.component.css[m
+[1mdeleted file mode 100644[m
+[1mindex 31ed223..0000000[m
+[1m--- a/src/app/sideBar/sideBar.component.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,83 +0,0 @@[m
+[31m-.sidenav {[m
+[31m-	opacity: .6;[m
+[31m-	position: relative;[m
+[31m-	margin-top: 20px;[m
+[31m-	left: 10px;[m
+[31m-	width: 180px;[m
+[31m-	height: 300px;[m
+[31m-	font-size: 15px;[m
+[31m-	-webkit-transition: 0.5s;[m
+[31m-	transition: 0.5s;[m
+[31m-	overflow: hidden;[m
+[31m-	z-index: 1;[m
+[31m-}[m
+[31m-.sidenav:hover {[m
+[31m-	opacity: .7;[m
+[31m-	background: black;[m
+[31m-}[m
+[31m-.sidenav a {[m
+[31m-	padding: 6px 6px 6px 32px;[m
+[31m-	text-decoration: none;[m
+[31m-	font-size: 20px;[m
+[31m-	color: gold;[m
+[31m-	display: block;[m
+[31m-	-webkit-transition: 0.3s;[m
+[31m-	transition: 0.3s;[m
+[31m-	font-family: "Lato", sans-serif;[m
+[31m-	cursor: pointer;[m
+[31m-}[m
+[31m-.sidenav a:hover{[m
+[31m-	display: block;[m
+[31m-	outline: 2px solid white;[m
+[31m-	border-left: 2px solid white;[m
+[31m-	border-right: 2px solid white;[m
+[31m-	color: white;[m
+[31m-[m
+[31m-}[m
+[31m-[m
+[31m-.openNav, .openNav>span {[m
+[31m-	display: inline-block;[m
+[31m-	margin: 0;[m
+[31m-}[m
+[31m-.openNav {[m
+[31m-	width: 220px;[m
+[31m-	color: gold;[m
+[31m-	cursor: pointer;[m
+[31m-	opacity: 0.5;[m
+[31m-	font-size: 40px;[m
+[31m-	-webkit-transition: 1s;[m
+[31m-	transition: 1s;[m
+[31m-}[m
+[31m-.menuText {[m
+[31m-	width: 0px;[m
+[31m-	opacity: 0;[m
+[31m-	text-transform: uppercase;[m
+[31m-	-webkit-transition: 1s;[m
+[31m-	transition: 1s;[m
+[31m-}[m
+[31m-.hide_to_left {[m
+[31m-	display: inline-block;[m
+[31m-	width: 50px;[m
+[31m-	opacity: 0;[m
+[31m-	-webkit-transition: 1s;[m
+[31m-	transition: 1s;[m
+[31m-}[m
+[31m-.openNav:hover>.hide_to_left {[m
+[31m-	width: 0;[m
+[31m-}[m
+[31m-.openNav:hover>.menuText, .menuText:hover {[m
+[31m-	opacity: 1;[m
+[31m-	width: 120px;[m
+[31m-}[m
+[31m-.openNav:hover {[m
+[31m-	opacity: 1;[m
+[31m-}[m
+[31m-[m
+[31m-@media screen and (max-height: 400px) {[m
+[31m-  .sidenav { height: 220px; width: 140px}[m
+[31m-  .sidenav a {font-size: 16px;}[m
+[31m-  .openNav { font-size: 30px; }[m
+[31m-  .openNav:hover>.menuText, .menuText:hover {[m
+[31m-	width: 95px;[m
+[31m-  }[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/sideBar/sideBar.component.html b/src/app/sideBar/sideBar.component.html[m
+[1mdeleted file mode 100644[m
+[1mindex 598884f..0000000[m
+[1m--- a/src/app/sideBar/sideBar.component.html[m
+[1m+++ /dev/null[m
+[36m@@ -1,14 +0,0 @@[m
+[31m-<div id="mySidenav" class="sidenav" #slideNavInstanse>[m
+[31m-  <a routerLink="/main">Будівельна компанія</a>[m
+[31m-  <a routerLink="/map" >About</a>[m
+[31m-  <a routerLink="/family">Services</a>[m
+[31m-  <a routerLink="/your-house">Clients</a>[m
+[31m-  <a routerLink="/advantages">Contact</a>[m
+[31m-  <a routerLink="/builder">Будівельна компанія</a>[m
+[31m-</div>[m
+[31m-[m
+[31m-<div class='openNav' #openNavInstance[m
+[31m-			(click)="openCloseNav( openNavInstance, slideNavInstanse )">[m
+[31m-	<span class='hide_to_left'>MENU </span><span>&#9776; </span><span class='menuText'> меню </span> <span>&#9776;</span>[m
+[31m-</div>[m
+[31m-<router-outlet></router-outlet>[m
+\ No newline at end of file[m

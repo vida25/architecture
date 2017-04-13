@@ -1,0 +1,11 @@
+[
+  {"property": "Загальна площа",  "value": "73.06"},
+  {"property": "Жила площа", "value": "29.82"},
+  {"property": "living room",  "value": "12.61"},
+  {"property": "bedroom",  "value": "17.21"},
+  {"property": "kitchen",  "value": "25.36"},
+  {"property": "bathroom 1", "value": "4.44"},
+  {"property": "bathroom 2", "value": "1.75"},
+  {"property": "hallway",  "value": "8.09"},
+  {"property": "balcony",  "value": "3.6"}
+]

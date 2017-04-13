@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-	moduleId: module.id,
+  moduleId: module.id,
   selector: 'my-app',
   template: `
-		<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   `,
 })
-export class AppComponent  {
-}
+export class AppComponent {}

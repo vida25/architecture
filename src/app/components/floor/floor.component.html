@@ -1,0 +1,25 @@
+<main role='main'>
+  <div class='general_planning'>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" style="display: inline-block;">
+       <svg:g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <svg:g>
+              <svg:g id="section-1" *ngIf='apartmentsInformation !== null'>
+                  <svg:g id="1B" class="apart" data-room="1" data-square="41,05"
+                  *ngFor="let apart of apartmentsInformation"
+                  (mouseenter)="showData(apart)"
+                  (mouseleave)="hideData()">
+                    <svg:polygon [attr.points]="replaceSpace(apart.points)"
+                        (click)="goToApartment(apart.id)"></svg:polygon>
+                  </svg:g>
+              </svg:g>
+          </svg:g>
+      </svg:g>
+    </svg>
+  </div>
+  <div *ngIf="aboutApartment">
+    <h2 style='text-align: center;'>
+      Кількість кімнат: {{aboutApartment.room}} | Загальна площа: {{aboutApartment.square}} м.кв.
+    </h2>
+  </div>
+</main>

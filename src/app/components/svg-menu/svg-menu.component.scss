@@ -1,0 +1,28 @@
+g.menu_floor {
+  -webkit-transition: .5s;
+  transition: .5s;
+  opacity: 1;
+}
+
+svg g>path {
+  z-index: 2;
+  -webkit-transition: .5s;
+  transition: .5s;
+  webkit-transition: .5s;
+}
+g.menu_floor_selection {
+  cursor: pointer;
+  z-index: 3;
+}
+g.menu_floor_selection:hover {
+  opacity: 1;
+}
+
+g.menu_floor_selection:hover>path {
+  fill: #eee;
+  opacity: 1;
+}
+
+.make_visible {
+  opacity: 1;
+}

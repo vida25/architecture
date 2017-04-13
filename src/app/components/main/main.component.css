@@ -1,0 +1,60 @@
+div#background_day, div#background_night, div#content {
+  display: block;
+  position: absolute;
+  height: 98%;
+  width: 99%;
+}
+div#background_day {
+  background: url('../../img/bg_day.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-transition: 1s ease-in;
+  transition: 1s ease-in;
+  min-width: 400px;
+  min-height: 400px;
+  z-index: 1;
+}
+div#background_night {
+  background: url('../../img/bg_night.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 400px;
+  min-height: 400px;
+  z-index: 0;
+}
+div#background_day, div#background_night {
+  background-repeat: no-repeat;
+}
+#content {
+  z-index: 3;
+}
+#day_or_night {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  margin-bottom: 5px;
+  background: black;
+  color: white;
+  top: 60%;
+  left: 45%;
+  font-weight: bold;
+  letter-spacing: 3px;
+  opacity: 0.5;
+  -webkit-transition: 1s;
+  transition: 1s;
+  cursor: pointer;
+}
+#day_or_night:hover {
+  opacity: 1;
+}
+
+.set_night {
+  opacity: 0;
+}
+
+@media screen and (max-height: 400px) and (max-width: 400px) {
+  #day_or_night {
+    margin-left: 50px;
+    font-size: 14px;
+  }
+}

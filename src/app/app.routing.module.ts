@@ -1,24 +1,23 @@
-import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
+import { NgModule } from '@angular/core';
 
-import { AppComponent }   		   from './app.component';
-import { MainComponent }         from './main/main.component';
-import { PlanningComponent }     from './planning/planning.component';
-import { HouseComponent }        from './house/house.component';
-import { FloorComponent }        from './floor/floor.component';
-import { ApartmentComponent }    from './apartment/apartment.component';
-import { NotFoundComponent }     from './not-found/not-found.component';
-
+import { ApartmentComponent } from './components/apartment/apartment.component';
+import { PlanningComponent } from './components/planning/planning.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HouseComponent } from './components/house/house.component';
+import { FloorComponent } from './components/floor/floor.component';
+import { MainComponent } from './components/main/main.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: 'main',  component: MainComponent },
-  { path: 'planning',  component: PlanningComponent },
-  { path: 'house/:id',  component: HouseComponent },
+  { path: 'house/:id1/section/:id2/floor/:id3/apartment/:id', component: ApartmentComponent },
   { path: 'house/:id1/section/:id2/floor/:id3', component: FloorComponent },
-  { path: 'house/:id1/section/:id2/floor/:id3/apartment/:id4', component: ApartmentComponent },
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'not-found', component: NotFoundComponent },
+  { path: 'planning', component: PlanningComponent },
+  { path: 'house/:id', component: HouseComponent },
+  { path: 'main', component: MainComponent },
   { path: '**', component: NotFoundComponent },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [ RouterModule.forRoot( routes, {

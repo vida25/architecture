@@ -1,56 +1,69 @@
-import { NgModule } 								from '@angular/core';
-import { BrowserModule }						from '@angular/platform-browser';
-import { FormsModule }							from '@angular/forms';
-import { RouterModule }							from '@angular/router';
-import { BrowserAnimationsModule } 	from '@angular/platform-browser/animations';
+import { Http, Response, HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 
-import { WindowRef } 								from './models/window-ref';
+import { ApartmentComponent } from './components/apartment/apartment.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PlanningComponent } from './components/planning/planning.component';
+import { AppRoutingModule } from './app.routing.module';
+import { SideBarComponent } from './components/sideBar/sideBar.component';
+import { SvgMenuComponent } from './components/svg-menu/svg-menu.component';
+import { HouseComponent } from './components/house/house.component';
+import { FloorComponent } from './components/floor/floor.component';
+import { MainComponent } from './components/main/main.component';
+import { AppComponent } from './app.component';
 
-import { AppRoutingModule } 				from './app.routing.module';
-import { AppComponent }							from './app.component';
-import { MainComponent } 						from './main/main.component';
-import { HighlightDirective } 			from './directives/higlight.directive';
-import { SideBarComponent } 				from './sideBar/sideBar.component';
-import { PlanningComponent } 				from './planning/planning.component';
-import { HouseComponent } 					from './house/house.component';
-import { FloorComponent } 					from './floor/floor.component';
-import { ApartmentComponent } 			from './apartment/apartment.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { HighlightDirective } from './directives/higlight.directive';
+import { PolygonDirective } from './directives/polygonDirective';
+
+import { WindowRef } from './models/window-ref';
+
+import { ApatrmentAboutService } from './services/apartment-about/apartment-about.service';
+import { SectionsAboutService } from './services/section/section.service';
 
 @NgModule({
-	// Components, Pipes, Directive
-	declarations: [
-		AppComponent,
-		MainComponent,
-		SideBarComponent,
-		PlanningComponent,
-		HouseComponent,
-		FloorComponent,
-		ApartmentComponent,
+  // Components, Pipes, Directive
+  declarations: [
+    ApartmentComponent,
+    PlanningComponent,
+    NotFoundComponent,
+    SideBarComponent,
+    SvgMenuComponent,
+    HouseComponent,
+    FloorComponent,
+    MainComponent,
+    AppComponent,
 
-		HighlightDirective,
+    HighlightDirective,
+    PolygonDirective,
+  ],
 
-		NotFoundComponent,
-	],
+  // Providers
+  providers: [
+    ApatrmentAboutService,
+    SectionsAboutService,
+    WindowRef,
+  ],
 
-	// Providers
-	providers: [
-		WindowRef
-	],
+  // Modules
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    RouterModule,
+    FormsModule,
+    HttpModule,
 
-	// Modules
-	imports: [
-		BrowserModule,
-		FormsModule,
-		RouterModule,
-		AppRoutingModule,
-		BrowserAnimationsModule,
-	],
+    // moduls created by developper;
+    AppRoutingModule,
+  ],
 
-	// Main Component
-	bootstrap: [ AppComponent	]
+  // Main Component
+  bootstrap: [ AppComponent ]
 })
 
 export class AppModule {
-	constructor() { }
+  constructor() { }
 }

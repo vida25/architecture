@@ -1,0 +1,14 @@
+<main id="fullpage" class="main__pages" role='main'>
+   <div id="background_day" [class.set_night]="night"></div>
+   <div id="background_night"></div>
+   <div id="content">
+   <side-bar-component></side-bar-component>
+      <div id="day_night">
+         <div>
+            <button  id='day_or_night'
+                     (click)="setDayOrNight()">{{dayNight.toUpperCase()}}</button>
+         </div>
+      </div>
+   </div>
+</main>
+<router-outlet></router-outlet>

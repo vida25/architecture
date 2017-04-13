@@ -1,0 +1,70 @@
+div.general_planning {
+  display: block;
+  margin: 0 auto;
+  background: url('../../img/step-three-c1.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 620px;
+  height: 320px;
+  z-index: 1;
+}
+svg {
+  display: inline-block;
+  width: 620px;
+  height: 320px;
+}
+svg polygon {
+  fill: rgb(200, 200, 200);
+  z-index: 2;
+  opacity: 0.2;
+}
+svg polygon:hover {
+  fill: rgb(200, 200, 200);
+  z-index: 2;
+  opacity: 1;
+}
+g {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+g.apart {
+  stroke: #5A5B5F;
+  cursor: pointer;
+  opacity: 0.1;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+g.apart:hover {
+  fill: rgb(200, 200, 200);
+  z-index: 9999;
+  opacity: .7;
+}
+
+#floor_selection {
+  fill: '#eee';
+  opacity: .4;
+}
+#floor_selection:hover {
+  opacity: 1;
+}
+
+#floor_selection path:hover {
+  fill: '#999'
+}
+
+svg path {
+  z-index: 2;
+}
+svg g {
+  z-index: 1;
+}
+svg path, text {
+  cursor: pointer;
+}
+svg path:hover, svg text:hover {
+  fill: #eee;
+}
+svg text:hover svg path {
+  fill: #eee;
+}

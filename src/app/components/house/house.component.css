@@ -1,0 +1,33 @@
+div.general_planning {
+  display: block;
+  margin: 0 auto;
+  background: url('../../img/step-two-14.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 841px;
+  height: 340px;
+  z-index: 1;
+}
+svg {
+  display: inline-block;
+  width: 841px;
+  height: 340px;
+}
+g.section {
+  stroke: #5A5B5F;
+  cursor: pointer;
+  fill: rgb(240, 240, 240);
+  opacity: 0.4;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+g.section:hover {
+  fill: rgb(200, 200, 200);
+  z-index: 9999;
+  opacity: .8;
+}
+
+.invisible {
+  translate: translate(-1000px, -1000px);
+  z-index: -999;
+}

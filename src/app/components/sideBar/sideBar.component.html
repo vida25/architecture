@@ -1,0 +1,9 @@
+<div id="mySidenav" class="sidenav" #slideNavInstanse>
+  <a routerLink="/planning">Planning</a>
+</div>
+
+<div class='openNav' #openNavInstance
+      (click)="openCloseNav( openNavInstance, slideNavInstanse )">
+  <span class='hide_to_left'>MENU </span><span>&#9776; </span><span class='menuText'> меню </span> <span>&#9776;</span>
+</div>
+<router-outlet></router-outlet>

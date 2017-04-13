@@ -1,0 +1,37 @@
+<svg:g class='menu_floor'>
+  <svg:g>
+    <svg:path d="M170,170  L 124.04,124.04  Q 145.13,109.95 170,105 Z" fill="white" stroke="grey"></path>
+    <svg:text x="154.09" y="131.59" font-size="10">1</text>
+  </svg:g>
+  <svg:g class='menu_floor_selection'>
+    <svg:path d="M170,170  L 170,105  Q 194.87,109.95 215.96,124.04 Z" fill="white" stroke="grey"></path>
+    <svg:text x="185.91" y="131.59" font-size="10">2</text>
+  </svg:g>
+  <svg:g class='menu_floor_selection' (click)="goToFloor()" >
+    <svg:path d="M170,170  L 215.96,124.04  Q 230.05,145.13 235,170 Z" fill="white" stroke="grey"></path>
+    <svg:text x="208.41" y="154.09" font-size="10">3</text>
+  </svg:g>
+  <svg:g class='menu_floor_selection'>
+    <svg:path d="M170,170  L 235,170  Q 230.05,194.87 215.96,215.96 Z" fill="white" stroke="grey"></path>
+    <svg:text x="208.41" y="185.91" font-size="10">4</text>
+  </svg:g>
+  <svg:g class='menu_floor_selection'>
+    <svg:path d="M170,170  L 215.96,215.96  Q 194.87,230.05 170,235 Z" fill="white" stroke="grey"></path>
+    <svg:text x="185.91" y="208.41" font-size="10">5</text>
+  </svg:g>
+  <svg:g class='menu_floor_selection'>
+    <svg:path d="M170,170  L 170,235  Q 145.13,230.05 124.04,215.96 Z" fill="white" stroke="grey"></path>
+    <svg:text x="154.09" y="208.41" font-size="10">6</text>
+  </svg:g>
+  <svg:g class='menu_floor_selection'>
+    <svg:path d="M170,170  L 124.04,215.96  Q 109.95,194.87 105,170 Z" fill="white" stroke="grey"></path>
+    <svg:text x="131.59" y="185.91" font-size="10">7</text>
+  </svg:g>
+  <svg:g>
+    <svg:path d="M170,170  L 105,170  Q 109.95,145.13 124.04,124.04 Z" fill="white" stroke="grey"></path>
+    <svg:text x="131.59" y="154.09" font-size="10">8</text>
+  </svg:g>
+  <svg:circle cx="170" cy="170" r="25" fill="white" stroke="grey"></circle>
+</svg:g>
+<router-outlet></router-outlet>
+<ng-content></ng-content>

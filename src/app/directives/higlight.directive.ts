@@ -1,8 +1,8 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-	selector: '[myHighlight]',
-	host: {
+  selector: '[myHighlight]',
+  host: {
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()'
   }

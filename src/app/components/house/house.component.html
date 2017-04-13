@@ -1,0 +1,20 @@
+<main role='main'>
+  <div class='general_planning'>
+  <svg xmlns="http://www.w3.org/2000/svg" >
+    <svg:g id="all-section" *ngIf="sections !== null">
+      <svg:g *ngFor="let section of sections"
+              (click)="makeVisibleSvgMenu(section)">
+        <svg:g xmlns="http://www.w3.org/2000/g"  class='section' >
+          <svg:polygon  xmlns="http://www.w3.org/2000/polygon"
+              [attr.points]="replaceSpace(section.points)" ></svg:polygon>
+                <svg:text xmlns="http://www.w3.org/2000/text">
+                  <svg:tspan xmlns="http://www.w3.org/2000/tspan"
+                      [attr.x]="section.labelX" [attr.y]="section.labelY">{{section.labelText}}</tspan>
+                </svg:text>
+        </svg:g>
+      </svg:g>
+      <g svg-menu-component  [class.invisible]="isEqual(null,selectedMenuItem)"></g>
+    </svg:g>
+  </svg>
+  </div>
+</main>
